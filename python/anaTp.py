@@ -37,7 +37,7 @@ def getFiles(sampleDict):
         TFileList[sample] = rt.TFile(sampleDict[sample],'READ')
     return TFileList
 
-def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', output = True, outFileName = './output.root', jetType = 'CHS', QCDType = 'HT'):
+def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', output = True, outFileName = './output.root', jetType = 'CHS', QCDType = 'Pt'):
     '''
     Takes tree variables and produces histograms normalized to sigma*lumi/nEvts
     @treeVarDict : dictionary of variables to be run through analysis
@@ -89,7 +89,7 @@ def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', ou
         print key
 
     for key in Backgrounds:
-        if 'ST' in key:
+        if 'ST' in key and '_t_' not in key:
             bkgrTrees['ST'] = rt.TChain('ana'+jetType+'/tree')
             bkgrTrees['ST'].Add(Backgrounds[key])
             nEvts['ST'] = 0
@@ -103,7 +103,7 @@ def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', ou
         print key
 
     for key in bkgrFiles:
-        if 'ST' in key:
+        if 'ST' in key and '_t_' not in key:
             tempHists[key] = bkgrFiles[key].Get('allEvents/hEventCount_wt')
             nEvts['ST'] += tempHists[key].Integral(0,10000)
         else:
@@ -135,15 +135,16 @@ def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', ou
                     tree.Draw(treeVar+'>>'+key+'('+treeVarDict[treeVar]['nBins']+','+treeVarDict[treeVar]['xMin']+','+treeVarDict[treeVar]['xMax']+')',treeVarDict[treeVar][Wts]+'*('+treeVarDict[treeVar]['Cuts']+')')
                     print key + ' retrieved'
                     varHists[treeVar][key] = rt.gROOT.FindObject(key)
-                    if 'ST' not in key:
+                    if 'ST' not in key and 'Mtt' not in key:
                         bkgrFiles[key].Close()
-        
+        print "Scaling" 
         for key in varHists[treeVar]:
+            print key
             if 'Data' not in key:
                 varHists[treeVar][key].Scale((sampleXsec[key]/nEvts[key])*lumi)
         if QCDType is 'Pt':
-            varHists[treeVar]['QCD'] = varHists[treeVar]['QCDPt300'].Clone('QCD')
-            varHists[treeVar].pop('QCDPt300', None)
+            varHists[treeVar]['QCD'] = varHists[treeVar]['QCDPt3200'].Clone('QCD')
+            varHists[treeVar].pop('QCDPt3200', None)
             for key, hist in varHists[treeVar].items():
                 if ('QCDPt' in key):
                     varHists[treeVar]['QCD'].Add(hist)
@@ -159,10 +160,25 @@ def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', ou
                     varHists[treeVar].pop(key, None)
                 else:
                     continue
+        for key in varHists[treeVar]:
+            if 'Mtt' in key:
+                varHists[treeVar]['TTJetsMtt'] = varHists[treeVar]['TTJetsMtt700'].Clone('TTJetsMtt')
+                varHists[treeVar]['TTJetsMtt'].Add(varHists[treeVar]['TTJetsMtt1000'])
+                varHists[treeVar].pop('TTJetsMtt700', None)
+                varHists[treeVar].pop('TTJetsMtt1000', None)
+                break
+        for key in varHists[treeVar]:
+            if 'ST_t' in key:
+                varHists[treeVar]['ST_t'] = varHists[treeVar]['ST_t_top'].Clone('ST_t')
+                varHists[treeVar]['ST_t'].Add(varHists[treeVar]['ST_t_antitop'])
+                varHists[treeVar].pop('ST_t_top', None)
+                varHists[treeVar].pop('ST_t_antitop', None)
+                break
+
         print 'Number of events for ' + treeVar + ':'
         for key in varHists[treeVar]:
             error = rt.Double(0)
-            integral = varHists[treeVar][key].IntegralAndError(0,1000,error)
+            integral = varHists[treeVar][key].IntegralAndError(1,1000,error)
             print key + ':      ', integral, ' +\- ', error
 
     if output is True:
@@ -194,6 +210,7 @@ def ABCD(RegionA, RegionB, RegionC, RegionD, output = True, outFileName = './sig
             if ('Data' not in key) and ('QCD' not in key) and ('LH' not in key) and ('RH' not in key):
                 cutA[var]['dataQCD'].Add(cutA[var][key],-1)
     for var in cutB:
+        varB = var
         cutB[var]['dataQCD'] = cutB[var]['Data'].Clone('dataQCD')
         for key in cutB[var]:
             if ('Data' not in key) and ('QCD' not in key) and ('LH' not in key) and ('RH' not in key):
@@ -206,10 +223,12 @@ def ABCD(RegionA, RegionB, RegionC, RegionD, output = True, outFileName = './sig
                 cutC[var]['dataQCD'].Add(cutC[var][key],-1)
     for var in cutD:
         cutD[var]['dataQCD'] = cutD[var]['Data'].Clone('dataQCD')
-        if 'mtprime' in var:
-            cutD[var]['estQCD'] = cutB['mtprimeDummy']['dataQCD'].Clone('estQCD')
+        if 'mtprime' in var or 'Mjj' in var:
+            cutD[var]['estQCD'] = cutB[varB]['dataQCD'].Clone('estQCD')
             cutD[var]['estQCD'].Scale(cutC[varC]['dataQCD'].Integral(0,1000)/cutA[varA]['dataQCD'].Integral(0,1000))
-            print 'B*C/A = ', cutB['mtprimeDummy']['dataQCD'].Integral(0,1000)*(cutC[varC]['dataQCD'].Integral(0,1000)/cutA[varA]['dataQCD'].Integral(0,1000))
+            cutD[var]['MC_estQCD'] = cutB[varB]['QCD'].Clone('estQCD_MC')
+            cutD[var]['MC_estQCD'].Scale(cutC[varC]['QCD'].Integral(0,1000)/cutA[varA]['QCD'].Integral(0,1000))
+            print 'B*C/A = ', cutB[varB]['dataQCD'].Integral(0,1000)*(cutC[varC]['dataQCD'].Integral(0,1000)/cutA[varA]['dataQCD'].Integral(0,1000))
         else:
             cutD[var]['estQCD'] = cutB[var]['dataQCD'].Clone('estQCD')
             cutD[var]['estQCD'].Scale(cutC[var]['dataQCD'].Integral(0,1000)/cutA[var]['dataQCD'].Integral(0,1000))
@@ -228,6 +247,8 @@ def ABCD(RegionA, RegionB, RegionC, RegionD, output = True, outFileName = './sig
         outFile.Close()
     gc.collect()
 #    return cutD
+    for var in cutC:
+        print cutC[var]['dataQCD'].Integral(0,1000)
     return cutA, cutB, cutC, cutD
 
 def Mjj(idx1, idx2):
