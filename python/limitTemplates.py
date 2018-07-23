@@ -13,8 +13,13 @@ outFileName = sys.argv[1]
 jetType = 'CHS' # The tree to be run over
 QCDType = 'Pt' # Which QCD sample to run over: can be 'Pt' or 'HT'
 do2015 = False
-dotH = True
-dotZ = False
+if 'tH' in outFileName:
+    dotH = True
+    dotZ = False
+else:
+    dotH = False
+    dotZ = True
+
 #isRegionA['ht']['Cuts'] = 'ht>1100 && @idxHTagged.size()==0 && @idxAntiHTagged.size()>0 && @idxTopTaggedM.size()==0 && ptAntiHTagged > 350' 
 #isRegionB_mt['mtprimeDummy']['Cuts'] = 'ht>1100 && @idxHTagged.size()==0 && @idxAntiHTagged.size()>0 && @idxTopTaggedM.size()>0 && dR(etaAntiHTagged,phiAntiHTagged,etaTopTaggedM,phiTopTaggedM)>2.0 && ptAntiHTagged > 350 && ptTopTaggedM>500' 
 #isRegionC['ht']['Cuts'] = 'ht>1100 && @idxHTagged.size()>0 && @idxAntiHTagged.size()>=0 && @idxTopTaggedM.size()==0 && ptHTagged > 350'
@@ -31,30 +36,36 @@ dotZ = False
 #isRegionB_mt['mtprimeBTilde_tM_H1M0L']['Cuts'] = 'isRegionB_tM_H1M0L && @ptExtraAK4.size()>1 && Sum$(abs(etaAK4)>2.4)>0 && @ptCleanedMu.size()==0 && @ptCleanedEl.size()==0' 
 #isRegionC_mt['mtprimeCTilde_tM_H1M0L']['Cuts'] = 'isRegionC_tM_H1M0L && @ptExtraAK4.size()>1 && Sum$(abs(etaAK4)>2.4)>0 && @ptCleanedMu.size()==0 && @ptCleanedEl.size()==0' 
 #isRegionD_mt['mtprimeDTilde_tM_H1M0L']['Cuts'] = 'isRegionD_tM_H1M0L && @ptExtraAK4.size()>1 && Sum$(abs(etaAK4)>2.4)>0 && @ptCleanedMu.size()==0 && @ptCleanedEl.size()==0'
-#isRegionA_mt['mtprimeATilde_tM_H1M0L']['Cuts'] = 'isRegionA_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&& @ptCleanedMu.size()==0 && @ptCleanedEl.size()==0'
-#isRegionB_mt['mtprimeBTilde_tM_H1M0L']['Cuts'] = 'isRegionB_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&& @ptCleanedMu.size()==0 && @ptCleanedEl.size()==0' 
-#isRegionC_mt['mtprimeCTilde_tM_H1M0L']['Cuts'] = 'isRegionC_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])&& @ptCleanedMu.size()==0 && @ptCleanedEl.size()==0' 
-#isRegionD_mt['mtprimeDTilde_tM_H1M0L']['Cuts'] = 'isRegionD_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])&& @ptCleanedMu.size()==0 && @ptCleanedEl.size()==0'
 
-isRegionA_mt['mtprimeATilde_tM_H1M0L']['Cuts'] = 'isRegionA_tM_H1M0L&&Sum$(abs(etaAK4)>2.4)==00&&(ptAK8[0]+ptAK8[1])>850' 
-isRegionB_mt['mtprimeBTilde_tM_H1M0L']['Cuts'] = 'isRegionB_tM_H1M0L&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850' 
-isRegionC_mt['mtprimeCTilde_tM_H1M0L']['Cuts'] = 'isRegionC_tM_H1M0L&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])' 
-isRegionD_mt['mtprimeDTilde_tM_H1M0L']['Cuts'] = 'isRegionD_tM_H1M0L&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])'
+#isRegionA_mt['mtprimeATilde_tM_H1M0L']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionA_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&'
+#isRegionB_mt['mtprimeBTilde_tM_H1M0L']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionB_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&' 
+#isRegionC_mt['mtprimeCTilde_tM_H1M0L']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionC_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])&&' 
+#isRegionD_mt['mtprimeDTilde_tM_H1M0L']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionD_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])&&'
+#
+#isRegionA_mt_tZ['mtprimeATilde_tM_ZB']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionA_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&'
+#isRegionB_mt_tZ['mtprimeBTilde_tM_ZB']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionB_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&' 
+#isRegionC_mt_tZ['mtprimeCTilde_tM_ZB']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionC_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&' 
+#isRegionD_mt_tZ['mtprimeDTilde_tM_ZB']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionD_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&'
 
-#isRegionA_mt['mtprimeATilde_tM_H1M0L']['Cuts'] = 'isRegionA_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850' 
-#isRegionB_mt['mtprimeBTilde_tM_H1M0L']['Cuts'] = 'isRegionB_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850' 
-#isRegionC_mt['mtprimeCTilde_tM_H1M0L']['Cuts'] = 'isRegionC_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])' 
-#isRegionD_mt['mtprimeDTilde_tM_H1M0L']['Cuts'] = 'isRegionD_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])'
+#isRegionA_mt['mtprimeATilde_tM_H1M0L']['Cuts'] = 'isRegionA_tM_H1M0L&&Sum$(abs(etaAK4)>2.4)==00&&(ptAK8[0]+ptAK8[1])>850' 
+#isRegionB_mt['mtprimeBTilde_tM_H1M0L']['Cuts'] = 'isRegionB_tM_H1M0L&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850' 
+#isRegionC_mt['mtprimeCTilde_tM_H1M0L']['Cuts'] = 'isRegionC_tM_H1M0L&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])' 
+#isRegionD_mt['mtprimeDTilde_tM_H1M0L']['Cuts'] = 'isRegionD_tM_H1M0L&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850&&!(higgsAnul[2])'
+#
+#isRegionA_mt_tZ['mtprimeATilde_tM_ZB']['Cuts'] = 'isRegionA_tM_ZB&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850' 
+#isRegionB_mt_tZ['mtprimeBTilde_tM_ZB']['Cuts'] = 'isRegionB_tM_ZB&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850' 
+#isRegionC_mt_tZ['mtprimeCTilde_tM_ZB']['Cuts'] = 'isRegionC_tM_ZB&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850&&!(ZAnul[2])' 
+#isRegionD_mt_tZ['mtprimeDTilde_tM_ZB']['Cuts'] = 'isRegionD_tM_ZB&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850&&!(ZAnul[2])'
 
-isRegionA_mt_tZ['mtprimeATilde_tM_ZB']['Cuts'] = 'isRegionA_tM_ZB&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850' 
-isRegionB_mt_tZ['mtprimeBTilde_tM_ZB']['Cuts'] = 'isRegionB_tM_ZB&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850' 
-isRegionC_mt_tZ['mtprimeCTilde_tM_ZB']['Cuts'] = 'isRegionC_tM_ZB&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850&&!(ZAnul[2])' 
-isRegionD_mt_tZ['mtprimeDTilde_tM_ZB']['Cuts'] = 'isRegionD_tM_ZB&&Sum$(abs(etaAK4)>2.4)==0&&(ptAK8[0]+ptAK8[1])>850&&!(ZAnul[2])'
-
-#isRegionA_mt_tZ['mtprimeATilde_tM_ZB']['Cuts'] = 'isRegionA_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850' 
-#isRegionB_mt_tZ['mtprimeBTilde_tM_ZB']['Cuts'] = 'isRegionB_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850' 
-#isRegionC_mt_tZ['mtprimeCTilde_tM_ZB']['Cuts'] = 'isRegionC_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&!(ZAnul[2])' 
-#isRegionD_mt_tZ['mtprimeDTilde_tM_ZB']['Cuts'] = 'isRegionD_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&!(ZAnul[2])'
+isRegionA_mt['mtprimeATilde_tM_H1M0L']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionA_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0' 
+isRegionB_mt['mtprimeBTilde_tM_H1M0L']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionB_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0' 
+isRegionC_mt['mtprimeCTilde_tM_H1M0L']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionC_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&!(higgsAnul[2])' 
+isRegionD_mt['mtprimeDTilde_tM_H1M0L']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionD_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&!(higgsAnul[2])'
+#
+isRegionA_mt_tZ['mtprimeATilde_tM_ZB']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionA_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0' 
+isRegionB_mt_tZ['mtprimeBTilde_tM_ZB']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionB_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0' 
+isRegionC_mt_tZ['mtprimeCTilde_tM_ZB']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionC_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&!(ZAnul[2])' 
+isRegionD_mt_tZ['mtprimeDTilde_tM_ZB']['Cuts'] = '(SelectedEvent_hltdecisionBG||SelectedEvent_hltdecisionH)&&isRegionD_tM_ZB&&@ptExtraAK4.size()>1&&Sum$(abs(etaExtraAK4)>2.4)>0&&!(ZAnul[2])'
 
 #isRegionA_mt['mtprimeATilde_tM_H1M0L']['Cuts'] = 'isRegionA_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&ptZTagged0L>350' 
 #isRegionB_mt['mtprimeBTilde_tM_H1M0L']['Cuts'] = 'isRegionB_tM_H1M0L&&@ptExtraAK4.size()>1&&Sum$(abs(etaAK4)>2.4)>0&&(ptAK8[0]+ptAK8[1])>850&&ptZTagged0L>350' 
@@ -103,10 +114,12 @@ if dotH:
 
     #hists['A']['HTUp'], hists['B']['HTUp'], hists['C']['HTUp'], hists['D']['HTUp'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_HTUp.root', 'Wts_HTUp', 'SigWts_HTUp')
     #hists['A']['HTDown'], hists['B']['HTDown'], hists['C']['HTDown'], hists['D']['HTDown'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_HTDown.root', 'Wts_HTDown', 'SigWts_HTDown')
-#    hists['A']['JERUp'], hists['B']['JERUp'], hists['C']['JERUp'], hists['D']['JERUp'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JERUp.root', 'Wts', 'SigWts', 'Nominal', 'JERUp', QCDType)
-#    hists['A']['JERDown'], hists['B']['JERDown'], hists['C']['JERDown'], hists['D']['JERDown'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JERDown.root', 'Wts', 'SigWts', 'Nominal', 'JERDown', QCDType)
-#    hists['A']['JESUp'], hists['B']['JESUp'], hists['C']['JESUp'], hists['D']['JESUp'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JESUp.root', 'Wts', 'SigWts', 'Nominal', 'JERUp', QCDType)
-#    hists['A']['JESDown'], hists['B']['JESDown'], hists['C']['JESDown'], hists['D']['JESDown'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JESDown.root', 'Wts', 'SigWts', 'Nominal', 'JESDown', QCDType)
+    hists['A']['JERUp'], hists['B']['JERUp'], hists['C']['JERUp'], hists['D']['JERUp'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JERUp.root', 'Wts', 'SigWts', 'Nominal', 'JERUp', QCDType)
+    hists['A']['JERDown'], hists['B']['JERDown'], hists['C']['JERDown'], hists['D']['JERDown'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JERDown.root', 'Wts', 'SigWts', 'Nominal', 'JERDown', QCDType)
+    hists['A']['JESUp'], hists['B']['JESUp'], hists['C']['JESUp'], hists['D']['JESUp'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JESUp.root', 'Wts', 'SigWts', 'Nominal', 'JERUp', QCDType)
+    hists['A']['JESDown'], hists['B']['JESDown'], hists['C']['JESDown'], hists['D']['JESDown'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JESDown.root', 'Wts', 'SigWts', 'Nominal', 'JESDown', QCDType)
+    hists['A']['JMRUp'], hists['B']['JMRUp'], hists['C']['JMRUp'], hists['D']['JMRUp'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JMRUp.root', 'Wts', 'SigWts', 'Nominal', 'JMRUp', QCDType)
+    hists['A']['JMRDown'], hists['B']['JMRDown'], hists['C']['JMRDown'], hists['D']['JMRDown'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_JMRDown.root', 'Wts', 'SigWts', 'Nominal', 'JMRDown', QCDType)
     hists['A']['ttagDown'], hists['B']['ttagDown'], hists['C']['ttagDown'], hists['D']['ttagDown'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_ttagDown.root', 'Wts_topSFDown', 'SigWts_topSFDown', 'Nominal', jetType, QCDType)
     hists['A']['ttagUp'], hists['B']['ttagUp'], hists['C']['ttagUp'], hists['D']['ttagUp'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MT_ttagUp.root', 'Wts_topSFUp', 'SigWts_topSFUp', 'Nominal', jetType, QCDType)
     hists['A']['lDown'], hists['B']['lDown'], hists['C']['lDown'], hists['D']['lDown'] = ABCD(isRegionA_mt,isRegionB_mt,isRegionC_mt,isRegionD_mt, False, './limits/LimitHists-MTlDown.root', 'Wts_lDown', 'SigWts_lDown', 'Nominal', jetType, QCDType)
@@ -123,10 +136,12 @@ if dotZ:
     
     #hists['A']['HTUp'], hists['B']['HTUp'], hists['C']['HTUp'], hists['D']['HTUp'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_HTUp.root', 'Wts_HTUp', 'SigWts_HTUp')
     #hists['A']['HTDown'], hists['B']['HTDown'], hists['C']['HTDown'], hists['D']['HTDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_HTDown.root', 'Wts_HTDown', 'SigWts_HTDown')
-#    hists['A']['JERUp'], hists['B']['JERUp'], hists['C']['JERUp'], hists['D']['JERUp'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JERUp.root', 'Wts', 'SigWts', 'Nominal', 'JERUp', QCDType)
-#    hists['A']['JERDown'], hists['B']['JERDown'], hists['C']['JERDown'], hists['D']['JERDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JERDown.root', 'Wts', 'SigWts', 'Nominal', 'JERDown', QCDType)
-#    hists['A']['JESUp'], hists['B']['JESUp'], hists['C']['JESUp'], hists['D']['JESUp'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JESUp.root', 'Wts', 'SigWts', 'Nominal', 'JERUp', QCDType)
-#    hists['A']['JESDown'], hists['B']['JESDown'], hists['C']['JESDown'], hists['D']['JESDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JESDown.root', 'Wts', 'SigWts', 'Nominal', 'JESDown', QCDType)
+    hists['A']['JERUp'], hists['B']['JERUp'], hists['C']['JERUp'], hists['D']['JERUp'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JERUp.root', 'Wts', 'SigWts', 'Nominal', 'JERUp', QCDType)
+    hists['A']['JERDown'], hists['B']['JERDown'], hists['C']['JERDown'], hists['D']['JERDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JERDown.root', 'Wts', 'SigWts', 'Nominal', 'JERDown', QCDType)
+    hists['A']['JESUp'], hists['B']['JESUp'], hists['C']['JESUp'], hists['D']['JESUp'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JESUp.root', 'Wts', 'SigWts', 'Nominal', 'JERUp', QCDType)
+    hists['A']['JESDown'], hists['B']['JESDown'], hists['C']['JESDown'], hists['D']['JESDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JESDown.root', 'Wts', 'SigWts', 'Nominal', 'JESDown', QCDType)
+    hists['A']['JMRUp'], hists['B']['JMRUp'], hists['C']['JMRUp'], hists['D']['JMRUp'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JMRUp.root', 'Wts', 'SigWts', 'Nominal', 'JMRUp', QCDType)
+    hists['A']['JMRDown'], hists['B']['JMRDown'], hists['C']['JMRDown'], hists['D']['JMRDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_JMRDown.root', 'Wts', 'SigWts', 'Nominal', 'JMRDown', QCDType)
     hists['A']['ttagDown'], hists['B']['ttagDown'], hists['C']['ttagDown'], hists['D']['ttagDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_ttagDown.root', 'Wts_topSFDown', 'SigWts_topSFDown', 'Nominal', jetType, QCDType)
     hists['A']['ttagUp'], hists['B']['ttagUp'], hists['C']['ttagUp'], hists['D']['ttagUp'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_ttagUp.root', 'Wts_topSFUp', 'SigWts_topSFUp', 'Nominal', jetType, QCDType)
     hists['A']['lDown'], hists['B']['lDown'], hists['C']['lDown'], hists['D']['lDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MTlDown.root', 'Wts_lDown', 'SigWts_lDown', 'Nominal', jetType, QCDType)
@@ -136,6 +151,38 @@ if dotZ:
     hists['A']['mufrDown'], hists['B']['mufrDown'], hists['C']['mufrDown'], hists['D']['mufrDown'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_mufrDown.root', 'Wts_mufrDown', 'SigWts_mufrDown', 'Nominal', jetType, QCDType)
     hists['A']['mufrUp'], hists['B']['mufrUp'], hists['C']['mufrUp'], hists['D']['mufrUp'] = ABCD(isRegionA_mt_tZ,isRegionB_mt_tZ,isRegionC_mt_tZ,isRegionD_mt_tZ, False, './limits/LimitHists-MT_mufrUp.root', 'Wts_mufrUp', 'SigWts_mufrUp', 'Nominal', jetType, QCDType)
 
+for region in hists:
+    for key in hists[region]:
+        for var in hists[region][key]:
+             for hist in hists[region][key][var].keys():
+                 if 'tH' in hist and '2600' not in hist and '2400' not in hists and '2200' not in hist and 'GeV' not in hist:
+                     if hist.replace('tH','tZ') not in hists[region][key][var]: continue
+                     hists[region][key][var][hist.replace('tH','tHtZ')] = hists[region][key][var][hist].Clone(hist.replace('tH','tHtZ'))
+                     hists[region][key][var][hist.replace('tH','tHtZ')].Add(hists[region][key][var][hist.replace('tH','tZ')], 1)
+                
+for region in hists:
+    for key in hists[region]:
+        for var in hists[region][key]:
+             for hist in hists[region][key][var].keys():
+                 if ('Tb' in hist or 'Tt' in hist) and '0p' not in hist:
+                     if '10GeV' in hist:
+                         hists[region][key][var][hist] = hists[region][key][var][hist].Clone(hist.replace('10GeV','00p'))
+                     else:
+                         hists[region][key][var][hist] = hists[region][key][var][hist].Clone(hist.split('_')[0]+'_'+hist.split('_')[1]+'_00p_'+hist.split('_')[2])
+
+for region in hists:
+    for key in hists[region]:
+        for var in hists[region][key]:
+            for hist in hists[region][key][var].keys():
+                if 'Tb' in hist or 'Tt' in hist:
+                    tmpInt = hists[region][key][var][hist].Integral(1,1000)
+                    if tmpInt != 0.0: continue
+                    print "0 integral found, inserting small number into ", hist
+                    binN = hists[region][key][var][hist].FindBin(int(hist.split('_')[1]))
+                    hists[region][key][var][hist].SetBinContent(binN, 0.0001)
+                    newInt = hists[region][key][var][hist].Integral(1,1000)
+                    print 'new Integral is ', newInt
+                        
 for region in hists:
     print 'Region ', region
     for key in hists[region]:   
@@ -156,9 +203,9 @@ for region in hists:
                         if 'Data' in hist:
                             finalHists[region][hist] = hists[region][key][var][hist].Clone('HT_region'+region+'_data_obs')
                         else:
-                            finalHists[region][hist] = hists[region][key][var][hist].Clone('HT_region'+region+'_'+hist)
-                            finalHists[region][hist+'_StatUp'] = finalHists[region][hist].Clone('HT_region'+region+'_'+hist+'_StatUp')
-                            finalHists[region][hist+'_StatDown'] = finalHists[region][hist].Clone('HT_region'+region+'_'+hist+'_StatDown')
+                            finalHists[region][hist] = hists[region][key][var][hist].Clone('HT_region'+region+'_'+hists[region][key][var][hist].GetName())
+                            finalHists[region][hist+'_StatUp'] = finalHists[region][hist].Clone('HT_region'+region+'_'+hists[region][key][var][hist].GetName()+'_StatUp')
+                            finalHists[region][hist+'_StatDown'] = finalHists[region][hist].Clone('HT_region'+region+'_'+hists[region][key][var][hist].GetName()+'_StatDown')
                             if 'MC_QCD' in hist and 'est' not in hist:
                                 finalHists[region]['MC_Background'] = finalHists[region][hist].Clone('HT_region'+region+'_MC_Background')
                                 finalHists[region]['MC_Background_StatUp'] = finalHists[region][hist].Clone('HT_region'+region+'_MC_Background_StatUp')
@@ -175,7 +222,7 @@ for region in hists:
                     else:
                         if 'Data' in hist:
                             continue
-                        finalHists[region][hist+'_'+key] = hists[region][key][var][hist].Clone('HT_region'+region+'_'+hist+'_'+key)
+                        finalHists[region][hist+'_'+key] = hists[region][key][var][hist].Clone('HT_region'+region+'_'+hists[region][key][var][hist].GetName()+'_'+key)
                         if 'MC_QCD' in hist and 'est' not in hist:
                             finalHists[region]['MC_Background_'+key] = finalHists[region][hist+'_'+key].Clone('HT_region'+region+'_MC_Background_'+key)
                         if 'D' in region:
@@ -206,9 +253,9 @@ for region in hists:
                         if 'Data' in hist:
                             finalHists[region][hist] = hists[region][key][var][hist].Clone('MTP_region'+region+'_data_obs')
                         else:
-                            finalHists[region][hist] = hists[region][key][var][hist].Clone('MTP_region'+region+'_'+hist)
-                            finalHists[region][hist+'_StatUp'] = finalHists[region][hist].Clone('MTP_region'+region+'_'+hist+'_StatUp')
-                            finalHists[region][hist+'_StatDown'] = finalHists[region][hist].Clone('MTP_region'+region+'_'+hist+'_StatDown')
+                            finalHists[region][hist] = hists[region][key][var][hist].Clone('MTP_region'+region+'_'+hists[region][key][var][hist].GetName())
+                            finalHists[region][hist+'_StatUp'] = finalHists[region][hist].Clone('MTP_region'+region+'_'+hists[region][key][var][hist].GetName()+'_StatUp')
+                            finalHists[region][hist+'_StatDown'] = finalHists[region][hist].Clone('MTP_region'+region+'_'+hists[region][key][var][hist].GetName()+'_StatDown')
                             if 'MC_QCD' in hist and 'est' not in hist:
                                 finalHists[region]['MC_Background'] = finalHists[region][hist].Clone('MTP_region'+region+'_MC_Background')
                                 finalHists[region]['MC_Background_StatUp'] = finalHists[region][hist].Clone('MTP_region'+region+'_MC_Background_StatUp')
@@ -225,7 +272,7 @@ for region in hists:
                     else:
                         if 'Data' in hist:
                             continue
-                        finalHists[region][hist+'_'+key] = hists[region][key][var][hist].Clone('MTP_region'+region+'_'+hist+'_'+key)
+                        finalHists[region][hist+'_'+key] = hists[region][key][var][hist].Clone('MTP_region'+region+'_'+hists[region][key][var][hist].GetName()+'_'+key)
                         if 'MC_QCD' in hist and 'est' not in hist:
                             finalHists[region]['MC_Background_'+key] = finalHists[region][hist+'_'+key].Clone('MTP_region'+region+'_MC_Background_'+key)
                         if 'D' in region:

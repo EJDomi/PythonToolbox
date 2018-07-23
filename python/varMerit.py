@@ -32,8 +32,8 @@ def doFOM(cutList, useQCDMC = True):
         doub.write('doubleRatioNums = { \n')
         doub.close()
     for cut in cutList:
-        outTableName = 'fomFiles/20Feb18/eventsABCD_FOM_'+QCDType+'_'+cut+'_'+jetType+'_20Feb18.txt' 
-        outFileName = 'histFiles/20Feb18/fullSelection_'+QCDType+'_'+cut+'_'+jetType+'_20Feb18.root'
+        outTableName = 'fomFiles/21May18/eventsABCD_FOM_'+QCDType+'_'+cut+'_'+jetType+'_21May18.txt' 
+        outFileName = 'histFiles/21May18/fullSelection_'+QCDType+'_'+cut+'_'+jetType+'_21May18.root'
         with open(doubleRatioFile,'a') as doub:
             doub.write('\''+outTableName.split('/')[2].split('.')[0]+'\' : { \n')
             doub.close()

@@ -26,7 +26,7 @@ if path.exists('weightFunctions.C'):
 
 nEvts = {}
 
-def getFiles(sampleDict):
+def getFiles(sampleDict, jetType):
     '''
     Books TFiles for given list of root files
     @sampleDict : {sampleName : lfn}
@@ -34,7 +34,11 @@ def getFiles(sampleDict):
 
     TFileList = {}
     for sample in sampleDict:
-        TFileList[sample] = rt.TFile(sampleDict[sample],'READ')
+        if 'CHS' in jetType:
+            TFileList[sample] = rt.TFile(sampleDict[sample],'READ')
+        else:   
+            replaceDir = sampleDict[sample].replace(sampleDict[sample].split('/')[12],sampleDict[sample].split('/')[12]+'_'+jetType) 
+            TFileList[sample] = rt.TFile(replaceDir,'READ')
     return TFileList
 
 def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', output = True, outFileName = './output.root', jetType = 'CHS', QCDType = 'Pt'):
@@ -66,8 +70,8 @@ def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', ou
         Signals = SignalFiles['JESDown']
         Backgrounds = BackgroundFiles['JESDown']
     
-    sigFiles  = getFiles(Signals)
-    bkgrFiles = getFiles(Backgrounds)
+    sigFiles  = getFiles(Signals,jetType)
+    bkgrFiles = getFiles(Backgrounds,jetType)
     #dataFiles = getFiles(Data)
 
     rt.TH1.SetDefaultSumw2()
@@ -79,23 +83,31 @@ def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', ou
     tempHists = {}
 
     varHists = {}
-    dataTree['Data'] = rt.TChain('ana'+jetType+'/tree')
+    dataTree['Data'] = rt.TChain('anaCHS/tree')
 
     print 'Files included:'
 
-    for key in Signals:  
+    for key in Signals: 
+        if 'CHS' not in jetType: 
+            replaceDir = Signals[key].replace(Signals[key].split('/')[12],Signals[key].split('/')[12]+'_'+jetType)
+        else:
+            replaceDir = Signals[key] 
         sigTrees[key] = rt.TChain('ana'+jetType+'/tree')
-        sigTrees[key].Add(Signals[key])
+        sigTrees[key].Add(replaceDir)
         print key
 
     for key in Backgrounds:
+        if 'CHS' not in jetType: 
+            replaceDir = Backgrounds[key].replace(Backgrounds[key].split('/')[12],Backgrounds[key].split('/')[12]+'_'+jetType) 
+        else:
+            replaceDir = Backgrounds[key] 
         if 'ST' in key and '_t_' not in key:
             bkgrTrees['ST'] = rt.TChain('ana'+jetType+'/tree')
-            bkgrTrees['ST'].Add(Backgrounds[key])
+            bkgrTrees['ST'].Add(replaceDir)
             nEvts['ST'] = 0
         else: 
             bkgrTrees[key] = rt.TChain('ana'+jetType+'/tree')
-            bkgrTrees[key].Add(Backgrounds[key])
+            bkgrTrees[key].Add(replaceDir)
         print key
 
     for key in Data:
@@ -103,6 +115,7 @@ def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', ou
         print key
 
     for key in bkgrFiles:
+        print key, 'test'
         if 'ST' in key and '_t_' not in key:
             tempHists[key] = bkgrFiles[key].Get('allEvents/hEventCount_wt')
             nEvts['ST'] += tempHists[key].Integral(1,10000)
@@ -132,11 +145,13 @@ def analysis(treeVarDict, sample = 'Nominal', Wts = 'Wts', SigWts = 'SigWts', ou
                     varHists[treeVar][key] = rt.gROOT.FindObject(key)
                     sigFiles[key].Close()
                 else:
-                    if 'QCD' in key and 'lhewts' in treeVarDict[treeVar][Wts]:
-                        if 'second[2]' in treeVarDict[treeVar][Wts]:
-                            tree.Draw(treeVar+'>>'+key+'('+treeVarDict[treeVar]['nBins']+','+treeVarDict[treeVar]['xMin']+','+treeVarDict[treeVar]['xMax']+')',treeVarDict[treeVar][Wts].replace('*SelectedEvent_lhewts.second[2]*SelectedEvent_lhewts.second[4]','')+'*('+treeVarDict[treeVar]['Cuts']+')')
-                        elif 'second[3]' in treeVarDict[treeVar][Wts]:
-                            tree.Draw(treeVar+'>>'+key+'('+treeVarDict[treeVar]['nBins']+','+treeVarDict[treeVar]['xMin']+','+treeVarDict[treeVar]['xMax']+')',treeVarDict[treeVar][Wts].replace('*SelectedEvent_lhewts.second[3]*SelectedEvent_lhewts.second[7]','')+'*('+treeVarDict[treeVar]['Cuts']+')')
+                    if 'QCD' in key and 'lhewts.second' in treeVarDict[treeVar][Wts]:
+                        if '[5]' in treeVarDict[treeVar][Wts]:
+                            #tree.Draw(treeVar+'>>'+key+'('+treeVarDict[treeVar]['nBins']+','+treeVarDict[treeVar]['xMin']+','+treeVarDict[treeVar]['xMax']+')',treeVarDict[treeVar][Wts].replace('*(SelectedEvent_lhewts.second[5]/SelectedEvent_lhewts.second[1])','')+'*('+treeVarDict[treeVar]['Cuts']+')')
+                            tree.Draw(treeVar+'>>'+key+'('+treeVarDict[treeVar]['nBins']+','+treeVarDict[treeVar]['xMin']+','+treeVarDict[treeVar]['xMax']+')',treeVarDict[treeVar][Wts].replace('*SelectedEvent_lhewts.second[5]','')+'*('+treeVarDict[treeVar]['Cuts']+')')
+                        elif '[9]' in treeVarDict[treeVar][Wts]:
+                            #tree.Draw(treeVar+'>>'+key+'('+treeVarDict[treeVar]['nBins']+','+treeVarDict[treeVar]['xMin']+','+treeVarDict[treeVar]['xMax']+')',treeVarDict[treeVar][Wts].replace('*(SelectedEvent_lhewts.second[9]/SelectedEvent_lhewts.second[1])','')+'*('+treeVarDict[treeVar]['Cuts']+')')
+                            tree.Draw(treeVar+'>>'+key+'('+treeVarDict[treeVar]['nBins']+','+treeVarDict[treeVar]['xMin']+','+treeVarDict[treeVar]['xMax']+')',treeVarDict[treeVar][Wts].replace('*SelectedEvent_lhewts.second[9]','')+'*('+treeVarDict[treeVar]['Cuts']+')')
                         print 'changed weights'
                     else:
                         tree.Draw(treeVar+'>>'+key+'('+treeVarDict[treeVar]['nBins']+','+treeVarDict[treeVar]['xMin']+','+treeVarDict[treeVar]['xMax']+')',treeVarDict[treeVar][Wts]+'*('+treeVarDict[treeVar]['Cuts']+')')

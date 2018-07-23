@@ -35,27 +35,42 @@ def DrawPlots(fin, varDict, doData, doScale, outDir, region):
     else:
       histDir = var
         
-    for bkgr in plotDictBkgr:
+    #for bkgr in plotDictBkgrTemp:
+    for bkgr in plotDictBkgrTemp:
       bkgrHists[bkgr] = fin.Get(histDir +'/'+ bkgr)
       print bkgr
+      #if 'regionD' in histDir and 'QCD' in bkgr:
+      #    bkgrHists['QCD'] = fin.Get(histDir +'_'+ 'estQCD')
+#      else:
+#          bkgrHists[bkgr] = fin.Get(histDir +'_'+ bkgr)
+#      bkgrHists[bkgr] = fin.Get(histDir +'_'+ bkgr)
+#      bkgrHists[bkgr].Rebin(2)
       helper.fix(bkgrHists[bkgr])
 
     for sig in plotDictSignal:
-      sigHists[sig] = fin.Get(histDir +'/'+ sig)
+      sigHists[sig] = fin.Get(histDir.replace('post','post')+'/'+ sig)
+#      sigHists[sig] = fin.Get(histDir+'/'+ sig)
+#      print sig
+#      sigHists[sig] = fin.Get(histDir +'_'+ sig)
+#      sigHists[sig].Rebin(2)
       helper.fix(sigHists[sig])
-      if doScale:
-        sigHists[sig].Scale(plotDictSignal[sig]['Scale'])
+      #if doScale:
+#        sigHists[sig].Scale(plotDictSignal[sig]['Scale'])
+        #sigHists[sig].Scale(1./sampleXsec[sig])
     for bkgr in bkgrHists:
       nBkgr[bkgr] = rt.Double(0.)
       nBkgr[bkgr] = bkgrHists[bkgr].Integral()
     if doData:
-      dataHist['Data'] = fin.Get(histDir + '/Data') 
+#      dataHist['Data'] = fin.Get(histDir + '/Data') 
+      dataHist['Data'] = fin.Get(histDir + '/data_obs') 
+#      dataHist['Data'].Rebin(2) 
       nData = dataHist['Data'].Integral()
       rescaleQCD = nData
       for bkgr in bkgrHists:
         if 'QCD' not in bkgr:
           rescaleQCD -= nBkgr[bkgr]
-      bkgrHists['QCD'].Scale(rescaleQCD/nBkgr['QCD'])
+#      bkgrHists['MC_QCD'].Scale(rescaleQCD/nBkgr['MC_QCD'])
+#      bkgrHists['QCD'].Scale(rescaleQCD/nBkgr['QCD'])
 
     if '$' in histDir:
       histDir = histDir.replace('$','')
@@ -78,10 +93,12 @@ def DrawPlots(fin, varDict, doData, doScale, outDir, region):
     if 'idxAK8' in histDir:
       histDir = histDir.replace('idxAK8','_')
     
-    histBkgr = bkgrHists['TTJets'].Clone('hbkgr')
-    for bkgr in bkgrHists:
-      if 'TTJets' not in bkgr:
-        histBkgr.Add(bkgrHists[bkgr])
+#    histBkgr = bkgrHists['TTJets'].Clone('hbkgr')
+    histBkgr = fin.Get(histDir +'/TotalProcs')
+    #helper.fix(histBkgr)
+#    for bkgr in bkgrHists:
+#     if 'TTJets' not in bkgr:
+#        histBkgr.Add(bkgrHists[bkgr])
     
     if doData:
       hratio = dataHist['Data'].Clone('hratio')
@@ -98,13 +115,13 @@ def DrawPlots(fin, varDict, doData, doScale, outDir, region):
       hratio.SetLineColor(1)
     
     histBkgr.SetLineStyle(1)
-    histBkgr.SetLineWidth(1)
-    histBkgr.SetLineColor(1)
-    histBkgr.SetFillColor(0)
+    histBkgr.SetLineWidth(3)
+    histBkgr.SetLineColor(rt.kRed)
+    histBkgr.SetFillColor(rt.kWhite)
 
     for bkgr in bkgrHists:
-      bkgrHists[bkgr].SetLineColor(plotDictBkgr[bkgr]['Color'])
-      bkgrHists[bkgr].SetFillColor(plotDictBkgr[bkgr]['Color'])
+      bkgrHists[bkgr].SetLineColor(plotDictBkgrTemp[bkgr]['Color'])
+      bkgrHists[bkgr].SetFillColor(plotDictBkgrTemp[bkgr]['Color'])
 
     for sig in sigHists:
       sigHists[sig].SetLineColor(plotDictSignal[sig]['Color'])
@@ -130,12 +147,16 @@ def DrawPlots(fin, varDict, doData, doScale, outDir, region):
       pad1 = rt.TPad("pad1","",0.0,0.0,1.0,0.3)
     else:
       pad0 = rt.TPad("pad0","",0.0,0.1,1.0,1.0)
+      
 
     if varDict[var]['log']:
       pad0.SetLogy()
     pad0.Draw()
     pad0.cd()
-    pad0.SetBottomMargin(0.05)
+    if doData:
+        pad0.SetBottomMargin(0.05)
+    else:
+        pad0.SetBottomMargin(0.10)
 
     if doData:
       dataHist['Data'].GetYaxis().SetTitle(varDict[var]['yLabel'])
@@ -157,13 +178,15 @@ def DrawPlots(fin, varDict, doData, doScale, outDir, region):
       histBkgr.GetXaxis().SetTitleOffset(1.2)
       histBkgr.GetYaxis().SetDecimals(False)
       rt.TGaxis.SetMaxDigits(3)
-
     if doData:
       dataHist['Data'].Draw('e1')
+      histBkgr.Draw('e1same')
+      histBkgr.Draw('histsame')
       stackBkgr.Draw('histsame')
     else:
       histBkgr.Draw('hist')
       stackBkgr.Draw('histsame')
+      histBkgr.Draw('same')
     #histBkgr.Draw('e1same')
     if doData:
       dataHist['Data'].Draw('e1same')  
@@ -217,7 +240,8 @@ def DrawPlots(fin, varDict, doData, doScale, outDir, region):
     if doData:
       leg.AddEntry(dataHist['Data'],"Data            ", "ep")
     for key, value in sorted(nBkgr.iteritems(), key=lambda (k,v): (v,k), reverse=True):
-      leg.AddEntry(bkgrHists[key], plotDictBkgr[key]['Legend'], "fl") 
+      leg.AddEntry(bkgrHists[key], plotDictBkgrTemp[key]['Legend'], "fl")
+    leg.AddEntry(histBkgr, "s+b postfit", "fl") 
     for sig in sorted(sigHists.iterkeys()):
       if doScale:
         leg.AddEntry(sigHists[sig], plotDictSignal[sig]['LegendScaled'], "fl")
@@ -248,7 +272,7 @@ def DrawPlots(fin, varDict, doData, doScale, outDir, region):
       hratio.GetYaxis().SetTitleOffset(0.35)
       hratio.GetYaxis().SetNdivisions(504)
       
-      hratio.Draw("e1")
+      hratio.Draw("e0")
 
       hratio.GetXaxis().SetRangeUser(rt.Double(varDict[var]['xMin']),rt.Double(varDict[var]['xMax']))
       hratio.SetMinimum(0.0)
@@ -257,7 +281,8 @@ def DrawPlots(fin, varDict, doData, doScale, outDir, region):
       line = rt.TLine(rt.Double(varDict[var]['xMin']),1.,rt.Double(varDict[var]['xMax']),1.)
       line.Draw()
       pad1.RedrawAxis()
-
+    else:
+      pad0.SetBottomMargin(0.15)
     c0.cd()
 
     CMS_lumi.lumi_13TeV = "35.9/fb"

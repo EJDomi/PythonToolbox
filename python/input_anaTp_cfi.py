@@ -1,9 +1,19 @@
 #!/usr/bin/env python
 import ROOT as rt
 # lfn of samples to be run over
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_2018_v2/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_HE/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_latest_cutflow/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_btagsf/'
+dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_latest/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_latest_Z1M0L_test/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_latest/'
 #dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_new_fix_v2/'
-dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_newTop/'
-#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_newTop_massWindow/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_new_fix_v3/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_new_fix_jmr_v2/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_new_fix_jmr_v2_cutflow/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_newTop_v3/'
+#dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_newTop_massWindow_v3/'
 #dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_sys_annulus_fixed_cutflow/'
 #dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_reduced/samples_sys_annulus_true/'
 #dirSamples = '/home/t3-ku/erichjs/work/B2G/CMSSW_8_0_15/src/TprimeAna/test/80X_3p2/samples_new/'
@@ -21,6 +31,12 @@ lumi = 35865.177 #B-H
 
 # Dictionaries of sample names and root files
 Data = { 
+         #'JetHT_2018A'      : dirSamples + 'JetHT_2018A.root',
+         #'JetHT_2018B_319077'      : dirSamples + 'JetHT_2018B_319077.root',
+         #'JetHT_2018B_control'      : dirSamples + 'JetHT_2018B_control.root',
+         #'JetHT_2018B_HEMask'      : dirSamples + 'JetHT_2018B_HEMask.root',
+         #'SingleMuon_2018A'      : dirSamples + 'SingleMuon_2018A.root',
+         #'SingleMuon_2018B'      : dirSamples + 'SingleMuon_2018B.root',
          'JetHT_2016B'      : dirSamples + 'JetHT_2016B.root',
          'JetHT_2016C'      : dirSamples + 'JetHT_2016C.root',
          'JetHT_2016D'      : dirSamples + 'JetHT_2016D.root',
@@ -29,7 +45,7 @@ Data = {
          'JetHT_2016G'      : dirSamples + 'JetHT_2016G.root',
          'JetHT_2016H_v2'      : dirSamples + 'JetHT_2016H_v2.root',
          'JetHT_2016H_v3'      : dirSamples + 'JetHT_2016H_v3.root',
-         #'JetHT_2016H_v3'      : dirSamples + 'JetHT_2016H_v3_reduced.root',
+         ##'JetHT_2016H_v3'      : dirSamples + 'JetHT_2016H_v3_reduced.root',
        }
 
 BackgroundFilesHT = { 'Nominal' : {
@@ -62,7 +78,7 @@ BackgroundFilesHT = { 'Nominal' : {
                     }
 BackgroundFilesPt = { 'Nominal' : {
                                     'TTJets'     : dirSamples + 'TTJets.root',
-                                    #'TTJets_reduced'     : dirSamples + 'TTJets_reduced.root',
+                                    #'TTJets_test'     : dirSamples + 'TTJets_test.root',
                                     #'TTJetsMtt700'     : dirSamples + 'TTJetsMTT700.root',
                                     #'TTJetsMtt1000'     : dirSamples + 'TTJetsMTT1000.root',
                                     'WJets'      : dirSamples + 'WJets.root',
@@ -111,219 +127,222 @@ SignalFiles = { 'Nominal' : {
                                 'TbtH_1000_LH' : dirSamples + 'TbtH_1000_LH.root',
                                 'TbtH_1100_LH' : dirSamples + 'TbtH_1100_LH.root',
                                 'TbtH_1200_LH' : dirSamples + 'TbtH_1200_LH.root',
+                 #               'TbtH_1200_LH_test' : dirSamples + 'TbtH_1200_LH_test.root',
                                 'TbtH_1300_LH' : dirSamples + 'TbtH_1300_LH.root',
                                 'TbtH_1400_LH' : dirSamples + 'TbtH_1400_LH.root',
                                 'TbtH_1500_LH' : dirSamples + 'TbtH_1500_LH.root',
                                 'TbtH_1700_LH' : dirSamples + 'TbtH_1700_LH.root',
                                 'TbtH_1800_LH' : dirSamples + 'TbtH_1800_LH.root',
+                 #               'TbtH_1800_LH_test' : dirSamples + 'TbtH_1800_LH_test.root',
 
-                 #               'TbtH_800_RH' : dirSamples + 'TbtH_800_RH.root',
-                 #               'TbtH_900_RH' : dirSamples + 'TbtH_900_RH.root',
-                 #               'TbtH_1000_RH' : dirSamples + 'TbtH_1000_RH.root',
-                 #               'TbtH_1100_RH' : dirSamples + 'TbtH_1100_RH.root',
-                 #               'TbtH_1200_RH' : dirSamples + 'TbtH_1200_RH.root',
-                 #               'TbtH_1300_RH' : dirSamples + 'TbtH_1300_RH.root',
-                 #               'TbtH_1400_RH' : dirSamples + 'TbtH_1400_RH.root',
-                 #               'TbtH_1500_RH' : dirSamples + 'TbtH_1500_RH.root',
-                 #               'TbtH_1700_RH' : dirSamples + 'TbtH_1700_RH.root',
-                 #               'TbtH_1800_RH' : dirSamples + 'TbtH_1800_RH.root',
+                                'TbtH_800_RH' : dirSamples + 'TbtH_800_RH.root',
+                                'TbtH_900_RH' : dirSamples + 'TbtH_900_RH.root',
+                                'TbtH_1000_RH' : dirSamples + 'TbtH_1000_RH.root',
+                                'TbtH_1100_RH' : dirSamples + 'TbtH_1100_RH.root',
+                                'TbtH_1200_RH' : dirSamples + 'TbtH_1200_RH.root',
+                                'TbtH_1300_RH' : dirSamples + 'TbtH_1300_RH.root',
+                                'TbtH_1400_RH' : dirSamples + 'TbtH_1400_RH.root',
+                                'TbtH_1500_RH' : dirSamples + 'TbtH_1500_RH.root',
+                                'TbtH_1700_RH' : dirSamples + 'TbtH_1700_RH.root',
+                                'TbtH_1800_RH' : dirSamples + 'TbtH_1800_RH.root',
 
-                 #               'TttH_800_LH' : dirSamples + 'TttH_800_LH.root',
-                 #               'TttH_900_LH' : dirSamples + 'TttH_900_LH.root',
-                 #               'TttH_1000_LH' : dirSamples + 'TttH_1000_LH.root',
-                 #               'TttH_1100_LH' : dirSamples + 'TttH_1100_LH.root',
-                 #               'TttH_1200_LH' : dirSamples + 'TttH_1200_LH.root',
-                 #               'TttH_1300_LH' : dirSamples + 'TttH_1300_LH.root',
-                 #               'TttH_1400_LH' : dirSamples + 'TttH_1400_LH.root',
-                 #               'TttH_1500_LH' : dirSamples + 'TttH_1500_LH.root',
-                 #               'TttH_1700_LH' : dirSamples + 'TttH_1700_LH.root',
-                 #               'TttH_1800_LH' : dirSamples + 'TttH_1800_LH.root',
+                                'TttH_800_LH' : dirSamples + 'TttH_800_LH.root',
+                                'TttH_900_LH' : dirSamples + 'TttH_900_LH.root',
+                                'TttH_1000_LH' : dirSamples + 'TttH_1000_LH.root',
+                                'TttH_1100_LH' : dirSamples + 'TttH_1100_LH.root',
+                                'TttH_1200_LH' : dirSamples + 'TttH_1200_LH.root',
+                                'TttH_1300_LH' : dirSamples + 'TttH_1300_LH.root',
+                                #'TttH_1300_LH_test' : dirSamples + 'TttH_1300_LH_test.root',
+                                'TttH_1400_LH' : dirSamples + 'TttH_1400_LH.root',
+                                'TttH_1500_LH' : dirSamples + 'TttH_1500_LH.root',
+                                'TttH_1700_LH' : dirSamples + 'TttH_1700_LH.root',
+                                'TttH_1800_LH' : dirSamples + 'TttH_1800_LH.root',
 
-                 #               'TttH_800_RH'  : dirSamples + 'TttH_800_RH.root',
-                 #               'TttH_900_RH'  : dirSamples + 'TttH_900_RH.root',
-                 #               'TttH_1000_RH' : dirSamples + 'TttH_1000_RH.root',
-                 #               'TttH_1100_RH' : dirSamples + 'TttH_1100_RH.root',
-                 #               'TttH_1200_RH' : dirSamples + 'TttH_1200_RH.root',
-                 #               'TttH_1300_RH' : dirSamples + 'TttH_1300_RH.root',
-                 #               'TttH_1400_RH' : dirSamples + 'TttH_1400_RH.root',
-                 #               'TttH_1500_RH' : dirSamples + 'TttH_1500_RH.root',
-                 #               'TttH_1700_RH' : dirSamples + 'TttH_1700_RH.root',
-                 #               'TttH_1800_RH' : dirSamples + 'TttH_1800_RH.root',
+                                'TttH_800_RH'  : dirSamples + 'TttH_800_RH.root',
+                                'TttH_900_RH'  : dirSamples + 'TttH_900_RH.root',
+                                'TttH_1000_RH' : dirSamples + 'TttH_1000_RH.root',
+                                'TttH_1100_RH' : dirSamples + 'TttH_1100_RH.root',
+                                'TttH_1200_RH' : dirSamples + 'TttH_1200_RH.root',
+                                'TttH_1300_RH' : dirSamples + 'TttH_1300_RH.root',
+                                'TttH_1400_RH' : dirSamples + 'TttH_1400_RH.root',
+                                'TttH_1500_RH' : dirSamples + 'TttH_1500_RH.root',
+                                'TttH_1700_RH' : dirSamples + 'TttH_1700_RH.root',
+                                'TttH_1800_RH' : dirSamples + 'TttH_1800_RH.root',
 
-                 #               'TbtZ_800_LH' : dirSamples + 'TbtZ_800_LH.root',
-                 #               'TbtZ_900_LH' : dirSamples + 'TbtZ_900_LH.root',
-                 #               'TbtZ_1000_LH' : dirSamples + 'TbtZ_1000_LH.root',
-                 #               'TbtZ_1100_LH' : dirSamples + 'TbtZ_1100_LH.root',
-                 #               'TbtZ_1200_LH' : dirSamples + 'TbtZ_1200_LH.root',
-                 #               'TbtZ_1300_LH' : dirSamples + 'TbtZ_1300_LH.root',
-                 #               'TbtZ_1400_LH' : dirSamples + 'TbtZ_1400_LH.root',
-                 #               'TbtZ_1500_LH' : dirSamples + 'TbtZ_1500_LH.root',
-                 #               'TbtZ_1700_LH' : dirSamples + 'TbtZ_1700_LH.root',
-                 #               'TbtZ_1800_LH' : dirSamples + 'TbtZ_1800_LH.root',
+                                'TbtZ_800_LH' : dirSamples + 'TbtZ_800_LH.root',
+                                'TbtZ_900_LH' : dirSamples + 'TbtZ_900_LH.root',
+                                'TbtZ_1000_LH' : dirSamples + 'TbtZ_1000_LH.root',
+                                'TbtZ_1100_LH' : dirSamples + 'TbtZ_1100_LH.root',
+                                'TbtZ_1200_LH' : dirSamples + 'TbtZ_1200_LH.root',
+                                'TbtZ_1300_LH' : dirSamples + 'TbtZ_1300_LH.root',
+                                'TbtZ_1400_LH' : dirSamples + 'TbtZ_1400_LH.root',
+                                'TbtZ_1500_LH' : dirSamples + 'TbtZ_1500_LH.root',
+                                'TbtZ_1700_LH' : dirSamples + 'TbtZ_1700_LH.root',
+                                'TbtZ_1800_LH' : dirSamples + 'TbtZ_1800_LH.root',
 
-                 #               'TbtZ_800_RH' : dirSamples + 'TbtZ_800_RH.root',
-                 #               'TbtZ_900_RH' : dirSamples + 'TbtZ_900_RH.root',
-                 #               'TbtZ_1000_RH' : dirSamples + 'TbtZ_1000_RH.root',
-                 #               'TbtZ_1100_RH' : dirSamples + 'TbtZ_1100_RH.root',
-                 #               'TbtZ_1200_RH' : dirSamples + 'TbtZ_1200_RH.root',
-                 #               'TbtZ_1300_RH' : dirSamples + 'TbtZ_1300_RH.root',
-                 #               'TbtZ_1400_RH' : dirSamples + 'TbtZ_1400_RH.root',
-                 #               'TbtZ_1500_RH' : dirSamples + 'TbtZ_1500_RH.root',
-                 #               'TbtZ_1700_RH' : dirSamples + 'TbtZ_1700_RH.root',
-                 #               'TbtZ_1800_RH' : dirSamples + 'TbtZ_1800_RH.root',
+                                'TbtZ_800_RH' : dirSamples + 'TbtZ_800_RH.root',
+                                'TbtZ_900_RH' : dirSamples + 'TbtZ_900_RH.root',
+                                'TbtZ_1000_RH' : dirSamples + 'TbtZ_1000_RH.root',
+                                'TbtZ_1100_RH' : dirSamples + 'TbtZ_1100_RH.root',
+                                'TbtZ_1200_RH' : dirSamples + 'TbtZ_1200_RH.root',
+                                'TbtZ_1300_RH' : dirSamples + 'TbtZ_1300_RH.root',
+                                'TbtZ_1400_RH' : dirSamples + 'TbtZ_1400_RH.root',
+                                'TbtZ_1500_RH' : dirSamples + 'TbtZ_1500_RH.root',
+                                'TbtZ_1700_RH' : dirSamples + 'TbtZ_1700_RH.root',
+                                'TbtZ_1800_RH' : dirSamples + 'TbtZ_1800_RH.root',
 
-                 #               'TttZ_800_LH' : dirSamples + 'TttZ_800_LH.root',
-                 #               'TttZ_900_LH' : dirSamples + 'TttZ_900_LH.root',
-                 #               'TttZ_1000_LH' : dirSamples + 'TttZ_1000_LH.root',
-                 #               'TttZ_1100_LH' : dirSamples + 'TttZ_1100_LH.root',
-                 #               'TttZ_1200_LH' : dirSamples + 'TttZ_1200_LH.root',
-                 #               'TttZ_1300_LH' : dirSamples + 'TttZ_1300_LH.root',
-                 #               'TttZ_1400_LH' : dirSamples + 'TttZ_1400_LH.root',
-                 #               'TttZ_1500_LH' : dirSamples + 'TttZ_1500_LH.root',
-                 #               'TttZ_1700_LH' : dirSamples + 'TttZ_1700_LH.root',
-                 #               'TttZ_1800_LH' : dirSamples + 'TttZ_1800_LH.root',
+                                'TttZ_800_LH' : dirSamples + 'TttZ_800_LH.root',
+                                'TttZ_900_LH' : dirSamples + 'TttZ_900_LH.root',
+                                'TttZ_1000_LH' : dirSamples + 'TttZ_1000_LH.root',
+                                'TttZ_1100_LH' : dirSamples + 'TttZ_1100_LH.root',
+                                'TttZ_1200_LH' : dirSamples + 'TttZ_1200_LH.root',
+                                'TttZ_1300_LH' : dirSamples + 'TttZ_1300_LH.root',
+                                'TttZ_1400_LH' : dirSamples + 'TttZ_1400_LH.root',
+                                'TttZ_1500_LH' : dirSamples + 'TttZ_1500_LH.root',
+                                'TttZ_1700_LH' : dirSamples + 'TttZ_1700_LH.root',
+                                'TttZ_1800_LH' : dirSamples + 'TttZ_1800_LH.root',
 
-                 #               'TttZ_800_RH' : dirSamples + 'TttZ_800_RH.root',
-                 #               'TttZ_900_RH' : dirSamples + 'TttZ_900_RH.root',
-                 #               'TttZ_1000_RH' : dirSamples + 'TttZ_1000_RH.root',
-                 #               'TttZ_1100_RH' : dirSamples + 'TttZ_1100_RH.root',
-                 #               'TttZ_1200_RH' : dirSamples + 'TttZ_1200_RH.root',
-                 #               'TttZ_1300_RH' : dirSamples + 'TttZ_1300_RH.root',
-                 #               'TttZ_1400_RH' : dirSamples + 'TttZ_1400_RH.root',
-                 #               'TttZ_1500_RH' : dirSamples + 'TttZ_1500_RH.root',
-                 #               'TttZ_1700_RH' : dirSamples + 'TttZ_1700_RH.root',
-                 #               'TttZ_1800_RH' : dirSamples + 'TttZ_1800_RH.root',
+                                'TttZ_800_RH' : dirSamples + 'TttZ_800_RH.root',
+                                'TttZ_900_RH' : dirSamples + 'TttZ_900_RH.root',
+                                'TttZ_1000_RH' : dirSamples + 'TttZ_1000_RH.root',
+                                'TttZ_1100_RH' : dirSamples + 'TttZ_1100_RH.root',
+                                'TttZ_1200_RH' : dirSamples + 'TttZ_1200_RH.root',
+                                'TttZ_1300_RH' : dirSamples + 'TttZ_1300_RH.root',
+                                'TttZ_1400_RH' : dirSamples + 'TttZ_1400_RH.root',
+                                'TttZ_1500_RH' : dirSamples + 'TttZ_1500_RH.root',
+                                'TttZ_1700_RH' : dirSamples + 'TttZ_1700_RH.root',
+                                'TttZ_1800_RH' : dirSamples + 'TttZ_1800_RH.root',
 
-                  #           'TbtH_800_10p_LH' : dirSamples + 'TbtH_800_10p_LH.root',
-                  #           'TbtH_1000_10p_LH' : dirSamples + 'TbtH_1000_10p_LH.root',
-                  #           'TbtH_1200_10p_LH' : dirSamples + 'TbtH_1200_10p_LH.root',
-                  #           'TbtH_1400_10p_LH' : dirSamples + 'TbtH_1400_10p_LH.root',
-                  #           'TbtH_1600_10p_LH' : dirSamples + 'TbtH_1600_10p_LH.root',
-                  #           'TbtH_1800_10p_LH' : dirSamples + 'TbtH_1800_10p_LH.root',
-                  #           'TbtH_2000_10p_LH' : dirSamples + 'TbtH_2000_10p_LH.root',
-                  #           'TbtH_2200_10p_LH' : dirSamples + 'TbtH_2200_10p_LH.root',
-                  #           'TbtH_2400_10p_LH' : dirSamples + 'TbtH_2400_10p_LH.root',
-                  #           'TbtH_2600_10p_LH' : dirSamples + 'TbtH_2600_10p_LH.root',
+                             'TbtH_800_10p_LH' : dirSamples + 'TbtH_800_10p_LH.root',
+                             'TbtH_1000_10p_LH' : dirSamples + 'TbtH_1000_10p_LH.root',
+                             'TbtH_1200_10p_LH' : dirSamples + 'TbtH_1200_10p_LH.root',
+                             'TbtH_1400_10p_LH' : dirSamples + 'TbtH_1400_10p_LH.root',
+                             'TbtH_1600_10p_LH' : dirSamples + 'TbtH_1600_10p_LH.root',
+                             'TbtH_1800_10p_LH' : dirSamples + 'TbtH_1800_10p_LH.root',
+                             'TbtH_2000_10p_LH' : dirSamples + 'TbtH_2000_10p_LH.root',
+                             'TbtH_2200_10p_LH' : dirSamples + 'TbtH_2200_10p_LH.root',
+                             'TbtH_2400_10p_LH' : dirSamples + 'TbtH_2400_10p_LH.root',
+                             'TbtH_2600_10p_LH' : dirSamples + 'TbtH_2600_10p_LH.root',
 
-                  #           'TbtH_800_20p_LH' : dirSamples + 'TbtH_800_20p_LH.root',
-                  #           'TbtH_1000_20p_LH' : dirSamples + 'TbtH_1000_20p_LH.root',
-                  #           'TbtH_1200_20p_LH' : dirSamples + 'TbtH_1200_20p_LH.root',
-                  #           'TbtH_1400_20p_LH' : dirSamples + 'TbtH_1400_20p_LH.root',
-                  #           'TbtH_1600_20p_LH' : dirSamples + 'TbtH_1600_20p_LH.root',
-                  #           'TbtH_1800_20p_LH' : dirSamples + 'TbtH_1800_20p_LH.root',
-                  #           'TbtH_2000_20p_LH' : dirSamples + 'TbtH_2000_20p_LH.root',
-                  #           'TbtH_2200_20p_LH' : dirSamples + 'TbtH_2200_20p_LH.root',
-                  #           'TbtH_2400_20p_LH' : dirSamples + 'TbtH_2400_20p_LH.root',
-                  #           'TbtH_2600_20p_LH' : dirSamples + 'TbtH_2600_20p_LH.root',
+                             'TbtH_800_20p_LH' : dirSamples + 'TbtH_800_20p_LH.root',
+                             'TbtH_1000_20p_LH' : dirSamples + 'TbtH_1000_20p_LH.root',
+                             'TbtH_1200_20p_LH' : dirSamples + 'TbtH_1200_20p_LH.root',
+                             'TbtH_1400_20p_LH' : dirSamples + 'TbtH_1400_20p_LH.root',
+                             'TbtH_1600_20p_LH' : dirSamples + 'TbtH_1600_20p_LH.root',
+                             'TbtH_1800_20p_LH' : dirSamples + 'TbtH_1800_20p_LH.root',
+                             'TbtH_2000_20p_LH' : dirSamples + 'TbtH_2000_20p_LH.root',
+                             'TbtH_2200_20p_LH' : dirSamples + 'TbtH_2200_20p_LH.root',
+                             'TbtH_2400_20p_LH' : dirSamples + 'TbtH_2400_20p_LH.root',
+                             'TbtH_2600_20p_LH' : dirSamples + 'TbtH_2600_20p_LH.root',
 
-                  #           'TbtH_800_30p_LH' : dirSamples + 'TbtH_800_30p_LH.root',
-                  #           'TbtH_1000_30p_LH' : dirSamples + 'TbtH_1000_30p_LH.root',
-                  #           'TbtH_1200_30p_LH' : dirSamples + 'TbtH_1200_30p_LH.root',
-                  #           'TbtH_1400_30p_LH' : dirSamples + 'TbtH_1400_30p_LH.root',
-                  #           'TbtH_1600_30p_LH' : dirSamples + 'TbtH_1600_30p_LH.root',
-                  #           'TbtH_1800_30p_LH' : dirSamples + 'TbtH_1800_30p_LH.root',
-                  #           'TbtH_2000_30p_LH' : dirSamples + 'TbtH_2000_30p_LH.root',
-                  #           'TbtH_2200_30p_LH' : dirSamples + 'TbtH_2200_30p_LH.root',
-                  #           'TbtH_2400_30p_LH' : dirSamples + 'TbtH_2400_30p_LH.root',
-                  #           'TbtH_2600_30p_LH' : dirSamples + 'TbtH_2600_30p_LH.root',
+                             'TbtH_800_30p_LH' : dirSamples + 'TbtH_800_30p_LH.root',
+                             'TbtH_1000_30p_LH' : dirSamples + 'TbtH_1000_30p_LH.root',
+                             'TbtH_1200_30p_LH' : dirSamples + 'TbtH_1200_30p_LH.root',
+                             'TbtH_1400_30p_LH' : dirSamples + 'TbtH_1400_30p_LH.root',
+                             'TbtH_1600_30p_LH' : dirSamples + 'TbtH_1600_30p_LH.root',
+                             'TbtH_1800_30p_LH' : dirSamples + 'TbtH_1800_30p_LH.root',
+                             'TbtH_2000_30p_LH' : dirSamples + 'TbtH_2000_30p_LH.root',
+                             'TbtH_2200_30p_LH' : dirSamples + 'TbtH_2200_30p_LH.root',
+                             'TbtH_2400_30p_LH' : dirSamples + 'TbtH_2400_30p_LH.root',
+                             'TbtH_2600_30p_LH' : dirSamples + 'TbtH_2600_30p_LH.root',
 
-                  #           'TbtH_2000_10GeV_LH' : dirSamples + 'TbtH_2000_10GeV_LH.root',
-                  #           'TbtH_2200_10GeV_LH' : dirSamples + 'TbtH_2200_10GeV_LH.root',
-                  #           'TbtH_2400_10GeV_LH' : dirSamples + 'TbtH_2400_10GeV_LH.root',
-                  #           'TbtH_2600_10GeV_LH' : dirSamples + 'TbtH_2600_10GeV_LH.root',
+                             'TbtH_2000_10GeV_LH' : dirSamples + 'TbtH_2000_10GeV_LH.root',
+                             'TbtH_2200_10GeV_LH' : dirSamples + 'TbtH_2200_10GeV_LH.root',
+                             'TbtH_2400_10GeV_LH' : dirSamples + 'TbtH_2400_10GeV_LH.root',
+                             'TbtH_2600_10GeV_LH' : dirSamples + 'TbtH_2600_10GeV_LH.root',
  
-                  #           'TttH_800_10p_RH' : dirSamples + 'TttH_800_10p_RH.root',
-                  #           'TttH_1000_10p_RH' : dirSamples + 'TttH_1000_10p_RH.root',
-                  #           'TttH_1200_10p_RH' : dirSamples + 'TttH_1200_10p_RH.root',
-                  #           'TttH_1400_10p_RH' : dirSamples + 'TttH_1400_10p_RH.root',
-                  #           'TttH_1600_10p_RH' : dirSamples + 'TttH_1600_10p_RH.root',
-                  #           'TttH_1800_10p_RH' : dirSamples + 'TttH_1800_10p_RH.root',
-                  #           'TttH_2000_10p_RH' : dirSamples + 'TttH_2000_10p_RH.root',
-                  #           'TttH_2200_10p_RH' : dirSamples + 'TttH_2200_10p_RH.root',
-                  #           'TttH_2400_10p_RH' : dirSamples + 'TttH_2400_10p_RH.root',
-                  #           'TttH_2600_10p_RH' : dirSamples + 'TttH_2600_10p_RH.root',
+                             'TttH_800_10p_RH' : dirSamples + 'TttH_800_10p_RH.root',
+                             'TttH_1000_10p_RH' : dirSamples + 'TttH_1000_10p_RH.root',
+                             'TttH_1200_10p_RH' : dirSamples + 'TttH_1200_10p_RH.root',
+                             'TttH_1400_10p_RH' : dirSamples + 'TttH_1400_10p_RH.root',
+                             'TttH_1600_10p_RH' : dirSamples + 'TttH_1600_10p_RH.root',
+                             'TttH_1800_10p_RH' : dirSamples + 'TttH_1800_10p_RH.root',
+                             'TttH_2000_10p_RH' : dirSamples + 'TttH_2000_10p_RH.root',
+                             'TttH_2200_10p_RH' : dirSamples + 'TttH_2200_10p_RH.root',
+                             'TttH_2400_10p_RH' : dirSamples + 'TttH_2400_10p_RH.root',
+                             'TttH_2600_10p_RH' : dirSamples + 'TttH_2600_10p_RH.root',
 
-                  #           'TttH_800_20p_RH' : dirSamples + 'TttH_800_20p_RH.root',
-                  #           'TttH_1000_20p_RH' : dirSamples + 'TttH_1000_20p_RH.root',
-                  #           #'TttH_1200_20p_RH' : dirSamples + 'TttH_1200_20p_RH.root',
-                  #           'TttH_1400_20p_RH' : dirSamples + 'TttH_1400_20p_RH.root',
-                  #           'TttH_1600_20p_RH' : dirSamples + 'TttH_1600_20p_RH.root',
-                  #           'TttH_1800_20p_RH' : dirSamples + 'TttH_1800_20p_RH.root',
-                  #           'TttH_2000_20p_RH' : dirSamples + 'TttH_2000_20p_RH.root',
-                  #           'TttH_2200_20p_RH' : dirSamples + 'TttH_2200_20p_RH.root',
-                  #           'TttH_2400_20p_RH' : dirSamples + 'TttH_2400_20p_RH.root',
-                  #           'TttH_2600_20p_RH' : dirSamples + 'TttH_2600_20p_RH.root',
+                             'TttH_800_20p_RH' : dirSamples + 'TttH_800_20p_RH.root',
+                             'TttH_1000_20p_RH' : dirSamples + 'TttH_1000_20p_RH.root',
+                             #'TttH_1200_20p_RH' : dirSamples + 'TttH_1200_20p_RH.root',
+                             'TttH_1400_20p_RH' : dirSamples + 'TttH_1400_20p_RH.root',
+                             'TttH_1600_20p_RH' : dirSamples + 'TttH_1600_20p_RH.root',
+                             'TttH_1800_20p_RH' : dirSamples + 'TttH_1800_20p_RH.root',
+                             'TttH_2000_20p_RH' : dirSamples + 'TttH_2000_20p_RH.root',
+                             'TttH_2200_20p_RH' : dirSamples + 'TttH_2200_20p_RH.root',
+                             'TttH_2400_20p_RH' : dirSamples + 'TttH_2400_20p_RH.root',
+                             'TttH_2600_20p_RH' : dirSamples + 'TttH_2600_20p_RH.root',
 
-                  #           'TttH_800_30p_RH' : dirSamples + 'TttH_800_30p_RH.root',
-                  #           'TttH_1000_30p_RH' : dirSamples + 'TttH_1000_30p_RH.root',
-                  #           'TttH_1200_30p_RH' : dirSamples + 'TttH_1200_30p_RH.root',
-                  #           'TttH_1400_30p_RH' : dirSamples + 'TttH_1400_30p_RH.root',
-                  #           'TttH_1600_30p_RH' : dirSamples + 'TttH_1600_30p_RH.root',
-                  #           'TttH_1800_30p_RH' : dirSamples + 'TttH_1800_30p_RH.root',
-                  #           #'TttH_2000_30p_RH' : dirSamples + 'TttH_2000_30p_RH.root',
-                  #           'TttH_2200_30p_RH' : dirSamples + 'TttH_2200_30p_RH.root',
-                  #           'TttH_2400_30p_RH' : dirSamples + 'TttH_2400_30p_RH.root',
-                  #           'TttH_2600_30p_RH' : dirSamples + 'TttH_2600_30p_RH.root',
+                             'TttH_800_30p_RH' : dirSamples + 'TttH_800_30p_RH.root',
+                             'TttH_1000_30p_RH' : dirSamples + 'TttH_1000_30p_RH.root',
+                             'TttH_1200_30p_RH' : dirSamples + 'TttH_1200_30p_RH.root',
+                             'TttH_1400_30p_RH' : dirSamples + 'TttH_1400_30p_RH.root',
+                             'TttH_1600_30p_RH' : dirSamples + 'TttH_1600_30p_RH.root',
+                             'TttH_1800_30p_RH' : dirSamples + 'TttH_1800_30p_RH.root',
+                             #'TttH_2000_30p_RH' : dirSamples + 'TttH_2000_30p_RH.root',
+                             'TttH_2200_30p_RH' : dirSamples + 'TttH_2200_30p_RH.root',
+                             'TttH_2400_30p_RH' : dirSamples + 'TttH_2400_30p_RH.root',
+                             'TttH_2600_30p_RH' : dirSamples + 'TttH_2600_30p_RH.root',
 
-                  #           'TttH_2000_10GeV_RH' : dirSamples + 'TttH_2000_10GeV_RH.root',
-                  #           'TttH_2200_10GeV_RH' : dirSamples + 'TttH_2200_10GeV_RH.root',
-                  #           'TttH_2400_10GeV_RH' : dirSamples + 'TttH_2400_10GeV_RH.root',
-                  #           'TttH_2600_10GeV_RH' : dirSamples + 'TttH_2600_10GeV_RH.root',
+                             'TttH_2000_10GeV_RH' : dirSamples + 'TttH_2000_10GeV_RH.root',
+                             'TttH_2200_10GeV_RH' : dirSamples + 'TttH_2200_10GeV_RH.root',
+                             'TttH_2400_10GeV_RH' : dirSamples + 'TttH_2400_10GeV_RH.root',
+                             'TttH_2600_10GeV_RH' : dirSamples + 'TttH_2600_10GeV_RH.root',
 
-                  #           'TbtZ_800_10p_LH' : dirSamples + 'TbtZ_800_10p_LH.root',
-                  #           'TbtZ_1000_10p_LH' : dirSamples + 'TbtZ_1000_10p_LH.root',
-                  #           'TbtZ_1200_10p_LH' : dirSamples + 'TbtZ_1200_10p_LH.root',
-                  #           'TbtZ_1400_10p_LH' : dirSamples + 'TbtZ_1400_10p_LH.root',
-                  #           'TbtZ_1600_10p_LH' : dirSamples + 'TbtZ_1600_10p_LH.root',
-                  #           'TbtZ_1800_10p_LH' : dirSamples + 'TbtZ_1800_10p_LH.root',
-                  #           'TbtZ_2000_10p_LH' : dirSamples + 'TbtZ_2000_10p_LH.root',
+                             'TbtZ_800_10p_LH' : dirSamples + 'TbtZ_800_10p_LH.root',
+                             'TbtZ_1000_10p_LH' : dirSamples + 'TbtZ_1000_10p_LH.root',
+                             'TbtZ_1200_10p_LH' : dirSamples + 'TbtZ_1200_10p_LH.root',
+                             'TbtZ_1400_10p_LH' : dirSamples + 'TbtZ_1400_10p_LH.root',
+                             'TbtZ_1600_10p_LH' : dirSamples + 'TbtZ_1600_10p_LH.root',
+                             'TbtZ_1800_10p_LH' : dirSamples + 'TbtZ_1800_10p_LH.root',
+                             'TbtZ_2000_10p_LH' : dirSamples + 'TbtZ_2000_10p_LH.root',
 
-                  #           'TbtZ_800_20p_LH' : dirSamples + 'TbtZ_800_20p_LH.root',
-                  #           #'TbtZ_1000_20p_LH' : dirSamples + 'TbtZ_1000_20p_LH.root',
-                  #           'TbtZ_1200_20p_LH' : dirSamples + 'TbtZ_1200_20p_LH.root',
-                  #           'TbtZ_1400_20p_LH' : dirSamples + 'TbtZ_1400_20p_LH.root',
-                  #           'TbtZ_1600_20p_LH' : dirSamples + 'TbtZ_1600_20p_LH.root',
-                  #           'TbtZ_1800_20p_LH' : dirSamples + 'TbtZ_1800_20p_LH.root',
-                  #           'TbtZ_2000_20p_LH' : dirSamples + 'TbtZ_2000_20p_LH.root',
+                             'TbtZ_800_20p_LH' : dirSamples + 'TbtZ_800_20p_LH.root',
+                             #'TbtZ_1000_20p_LH' : dirSamples + 'TbtZ_1000_20p_LH.root',
+                             'TbtZ_1200_20p_LH' : dirSamples + 'TbtZ_1200_20p_LH.root',
+                             'TbtZ_1400_20p_LH' : dirSamples + 'TbtZ_1400_20p_LH.root',
+                             'TbtZ_1600_20p_LH' : dirSamples + 'TbtZ_1600_20p_LH.root',
+                             'TbtZ_1800_20p_LH' : dirSamples + 'TbtZ_1800_20p_LH.root',
+                             'TbtZ_2000_20p_LH' : dirSamples + 'TbtZ_2000_20p_LH.root',
 
-                  #           'TbtZ_800_30p_LH' : dirSamples + 'TbtZ_800_30p_LH.root',
-                  #           'TbtZ_1000_30p_LH' : dirSamples + 'TbtZ_1000_30p_LH.root',
-                  #           'TbtZ_1200_30p_LH' : dirSamples + 'TbtZ_1200_30p_LH.root',
-                  #           'TbtZ_1400_30p_LH' : dirSamples + 'TbtZ_1400_30p_LH.root',
-                  #           'TbtZ_1600_30p_LH' : dirSamples + 'TbtZ_1600_30p_LH.root',
-                  #           'TbtZ_1800_30p_LH' : dirSamples + 'TbtZ_1800_30p_LH.root',
-                  #           'TbtZ_2000_30p_LH' : dirSamples + 'TbtZ_2000_30p_LH.root',
+                             'TbtZ_800_30p_LH' : dirSamples + 'TbtZ_800_30p_LH.root',
+                             'TbtZ_1000_30p_LH' : dirSamples + 'TbtZ_1000_30p_LH.root',
+                             'TbtZ_1200_30p_LH' : dirSamples + 'TbtZ_1200_30p_LH.root',
+                             'TbtZ_1400_30p_LH' : dirSamples + 'TbtZ_1400_30p_LH.root',
+                             'TbtZ_1600_30p_LH' : dirSamples + 'TbtZ_1600_30p_LH.root',
+                             'TbtZ_1800_30p_LH' : dirSamples + 'TbtZ_1800_30p_LH.root',
+                            'TbtZ_2000_30p_LH' : dirSamples + 'TbtZ_2000_30p_LH.root',
  
-                  #           'TttZ_800_10p_RH' : dirSamples + 'TttZ_800_10p_RH.root',
-                  #           'TttZ_1000_10p_RH' : dirSamples + 'TttZ_1000_10p_RH.root',
-                  #           'TttZ_1200_10p_RH' : dirSamples + 'TttZ_1200_10p_RH.root',
-                  #           'TttZ_1400_10p_RH' : dirSamples + 'TttZ_1400_10p_RH.root',
-                  #           'TttZ_1600_10p_RH' : dirSamples + 'TttZ_1600_10p_RH.root',
-                  #           'TttZ_1800_10p_RH' : dirSamples + 'TttZ_1800_10p_RH.root',
-                  #           'TttZ_2000_10p_RH' : dirSamples + 'TttZ_2000_10p_RH.root',
+                             'TttZ_800_10p_RH' : dirSamples + 'TttZ_800_10p_RH.root',
+                             'TttZ_1000_10p_RH' : dirSamples + 'TttZ_1000_10p_RH.root',
+                             'TttZ_1200_10p_RH' : dirSamples + 'TttZ_1200_10p_RH.root',
+                             'TttZ_1400_10p_RH' : dirSamples + 'TttZ_1400_10p_RH.root',
+                             'TttZ_1600_10p_RH' : dirSamples + 'TttZ_1600_10p_RH.root',
+                             'TttZ_1800_10p_RH' : dirSamples + 'TttZ_1800_10p_RH.root',
+                             'TttZ_2000_10p_RH' : dirSamples + 'TttZ_2000_10p_RH.root',
 
-                  #           'TttZ_800_20p_RH' : dirSamples + 'TttZ_800_20p_RH.root',
-                  #           #'TttZ_1000_20p_RH' : dirSamples + 'TttZ_1000_20p_RH.root',
-                  #           'TttZ_1200_20p_RH' : dirSamples + 'TttZ_1200_20p_RH.root',
-                  #           'TttZ_1400_20p_RH' : dirSamples + 'TttZ_1400_20p_RH.root',
-                  #           'TttZ_1600_20p_RH' : dirSamples + 'TttZ_1600_20p_RH.root',
-                  #           'TttZ_1800_20p_RH' : dirSamples + 'TttZ_1800_20p_RH.root',
-                  #           'TttZ_2000_20p_RH' : dirSamples + 'TttZ_2000_20p_RH.root',
+                             'TttZ_800_20p_RH' : dirSamples + 'TttZ_800_20p_RH.root',
+                             #'TttZ_1000_20p_RH' : dirSamples + 'TttZ_1000_20p_RH.root',
+                             'TttZ_1200_20p_RH' : dirSamples + 'TttZ_1200_20p_RH.root',
+                             'TttZ_1400_20p_RH' : dirSamples + 'TttZ_1400_20p_RH.root',
+                             'TttZ_1600_20p_RH' : dirSamples + 'TttZ_1600_20p_RH.root',
+                             'TttZ_1800_20p_RH' : dirSamples + 'TttZ_1800_20p_RH.root',
+                             'TttZ_2000_20p_RH' : dirSamples + 'TttZ_2000_20p_RH.root',
 
-                  #           'TttZ_800_30p_RH' : dirSamples + 'TttZ_800_30p_RH.root',
-                  #           'TttZ_1000_30p_RH' : dirSamples + 'TttZ_1000_30p_RH.root',
-                  #           'TttZ_1200_30p_RH' : dirSamples + 'TttZ_1200_30p_RH.root',
-                  #           'TttZ_1400_30p_RH' : dirSamples + 'TttZ_1400_30p_RH.root',
-                  #           'TttZ_1600_30p_RH' : dirSamples + 'TttZ_1600_30p_RH.root',
-                  #           'TttZ_1800_30p_RH' : dirSamples + 'TttZ_1800_30p_RH.root',
-                  #           'TttZ_2000_30p_RH' : dirSamples + 'TttZ_2000_30p_RH.root',
+                             'TttZ_800_30p_RH' : dirSamples + 'TttZ_800_30p_RH.root',
+                             'TttZ_1000_30p_RH' : dirSamples + 'TttZ_1000_30p_RH.root',
+                             'TttZ_1200_30p_RH' : dirSamples + 'TttZ_1200_30p_RH.root',
+                             'TttZ_1400_30p_RH' : dirSamples + 'TttZ_1400_30p_RH.root',
+                             'TttZ_1600_30p_RH' : dirSamples + 'TttZ_1600_30p_RH.root',
+                             'TttZ_1800_30p_RH' : dirSamples + 'TttZ_1800_30p_RH.root',
+                             'TttZ_2000_30p_RH' : dirSamples + 'TttZ_2000_30p_RH.root',
                             },
           }
 
 # Dictionary containing the x-sections of each of the MC samples
 sampleXsec = {
                'TTJets'       : 831.76,
-               'TTJets_reduced'       : 831.76,
+               'TTJets_test'       : 831.76,
                'TTJetsMtt700' : 831.76 * 0.0921 ,
                'TTJetsMtt1000': 831.76 * 0.02474,
                #'TTJetsMtt700' : 831.76  ,
@@ -337,30 +356,30 @@ sampleXsec = {
                'QCDHT1000'    : 1207,
                'QCDHT1500'    : 119.9,
                'QCDHT2000'    : 25.24,
-               'QCDPt80'     : 2762530,
-               'QCDPt120'    : 471100,
-               'QCDPt170'    : 117276., 
-               'QCDPt300'    : 7823.,
-               'QCDPt470'    : 648.2,
-               'QCDPt600'    : 186.9,
-               'QCDPt800'    : 32.293,
-               'QCDPt1000'   : 9.4183,
-               'QCDPt1400'   : 0.84265,
-               'QCDPt1800'   : 0.114943,
-               'QCDPt2400'   : 0.00682981,
-               'QCDPt3200'   : 0.000165445,
+               'QCDPt80'     : 2735000.,
+               'QCDPt120'    : 467500.,
+               'QCDPt170'    : 117400., 
+               'QCDPt300'    : 7753.,
+               'QCDPt470'    : 642.1,
+               'QCDPt600'    : 185.9,
+               'QCDPt800'    : 32.05,
+               'QCDPt1000'   : 9.365,
+               'QCDPt1400'   : 0.8398,
+               'QCDPt1800'   : 0.1124,
+               'QCDPt2400'   : 0.006752,
+               'QCDPt3200'   : 0.0001626,
                'ST'           : 35.6,
                'ST_t_top'     : 136.02,
                'ST_t_antitop' : 80.95,
                'ZJets'        : 6.97,
                'DYJets'        : 1187, #LO
-               'ttZJets'      : 0.616, #LO
-               'ttHJets'      : 0.5085, #LO
+               'ttZJets'      : 0.6529, #LO
+               'ttHJets'      : 0.295, #LO
                'ttWJets'      : 0.511, #LO
-               'tHQ'          : 0.2608,
-               'WW'           : 28.7,
-               'WZ'           : 22.82,
-               'ZZ'           : 6.842,
+               'tHQ'          : 0.2609,
+               'WW'           : 45.2,
+               'WZ'           : 23.43,
+               'ZZ'           : 6.912,
 
                'TbtH_800_LH'      :0.24125,# *(0.5*0.5)*0.25 = 0.0625
                'TttH_800_LH'      :0.0665,# *(0.5*0.5)*0.50 = 0.1250
@@ -383,12 +402,14 @@ sampleXsec = {
                'TttH_1100_RH'     :0.0265,
 
                'TbtH_1200_LH'     :0.061375,
+               'TbtH_1200_LH_test'     :0.061375,
                'TttH_1200_LH'     :0.019875,
                'TbtH_1200_RH'     :0.061375,
                'TttH_1200_RH'     :0.019875,
 
                'TbtH_1300_LH'     :0.04475,
                'TttH_1300_LH'     :0.015,
+               'TttH_1300_LH_test'     :0.015,
                'TbtH_1300_RH'     :0.04475,
                'TttH_1300_RH'     :0.015,
 
@@ -412,6 +433,7 @@ sampleXsec = {
                'TbtH_1700_RH'     :0.014375,
                'TttH_1700_RH'     :0.00525,
 
+               'TbtH_1800_LH_test'     :0.010875,
                'TbtH_1800_LH'     :0.010875,
                'TttH_1800_LH'     :0.00405,
                'TbtH_1800_RH'     :0.010875,
@@ -514,37 +536,37 @@ sampleXsec = {
                'TttH_2600_20p_RH' :0.000155,
 
                'TbtH_800_30p_LH'  :1.1538,# *(0.5*0.5)*0.25 = 0.0625
-               'TttH_800_30p_RH'  :0.0456,
+               'TttH_800_30p_RH'  :0.330323,
 
                'TbtH_1000_30p_LH' :0.3747,# *(0.5*0.5)*0.25 = 0.0625
-               'TttH_1000_30p_RH' :0.0254,
+               'TttH_1000_30p_RH' :0.106718,
 
                'TbtH_1100_30p_LH' :0.2272,
-               'TttH_1100_30p_RH' :0.0190,
+               'TttH_1100_30p_RH' :0.064774,
 
                'TbtH_1200_30p_LH' :0.14196,
-               'TttH_1200_30p_RH' :0.0145,
+               'TttH_1200_30p_RH' :0.040715,
 
                'TbtH_1300_30p_LH' :0.0915,
-               'TttH_1300_30p_RH' :0.0112,
+               'TttH_1300_30p_RH' :0.026255,
 
                'TbtH_1400_30p_LH' :0.0601,
-               'TttH_1400_30p_RH' :0.00865,
+               'TttH_1400_30p_RH' :0.017332,
 
                'TbtH_1500_30p_LH' :0.04041,
-               'TttH_1500_30p_RH' :0.00675,
+               'TttH_1500_30p_RH' :0.011697,
 
                'TbtH_1600_30p_LH' :0.02764,
-               'TttH_1600_30p_RH' :0.00525,
+               'TttH_1600_30p_RH' :0.008051,
 
                'TbtH_1700_30p_LH' :0.0193,
-               'TttH_1700_30p_RH' :0.00413,
+               'TttH_1700_30p_RH' :0.005623,
 
                'TbtH_1800_30p_LH' :0.01356,
-               'TttH_1800_30p_RH' :0.00324,
+               'TttH_1800_30p_RH' :0.003982,
 
                'TbtH_2000_30p_LH' :0.00702,
-               'TttH_2000_30p_RH' :0.00203,
+               'TttH_2000_30p_RH' :0.002065,
 
                'TbtH_2200_30p_LH' :0.00702,
                'TttH_2200_30p_RH' :0.00203,
@@ -725,21 +747,21 @@ sampleXsec = {
 
 ###################### TprimeTprime ###################################
                
-               'TpTp_800': 0.13099,
-               'TpTp_900': 0.061922,
-               'TpTp_1000': 0.030953,
-               'TpTp_1100': 0.016141,
-               'TpTp_1200': 0.0087015,
-               'TpTp_1300': 0.0048327,
-               'TpTp_1400': 0.0027375,
-               'TpTp_1500': 0.0015875,
-               'TpTp_1600': 0.00093471,
-               'TpTp_1700': 0.00055711,
-               'TpTp_1800': 0.00033677,
+               'TpTp_800': 0.196,
+               'TpTp_900': 0.0903,
+               'TpTp_1000': 0.0440,
+               'TpTp_1100': 0.0224,
+               'TpTp_1200': 0.0118,
+               'TpTp_1300': 0.00639,
+               'TpTp_1400': 0.00354,
+               'TpTp_1500': 0.00200,
+               'TpTp_1600': 0.001148,
+               'TpTp_1700': 0.000666,
+               'TpTp_1800': 0.000391,
              }
 sampleXsec1pb = {
                'TTJets'       : 831.76,
-               'TTJets_reduced'       : 831.76,
+               'TTJets_test'       : 831.76,
                'TTJetsMtt700' : 831.76 * 0.0921 ,
                'TTJetsMtt1000': 831.76 * 0.02474,
                #'TTJetsMtt700' : 831.76  ,
@@ -753,30 +775,30 @@ sampleXsec1pb = {
                'QCDHT1000'    : 1207,
                'QCDHT1500'    : 119.9,
                'QCDHT2000'    : 25.24,
-               'QCDPt80'     : 2762530,
-               'QCDPt120'    : 471100,
-               'QCDPt170'    : 117276., 
-               'QCDPt300'    : 7823.,
-               'QCDPt470'    : 648.2,
-               'QCDPt600'    : 186.9,
-               'QCDPt800'    : 32.293,
-               'QCDPt1000'   : 9.4183,
-               'QCDPt1400'   : 0.84265,
-               'QCDPt1800'   : 0.114943,
-               'QCDPt2400'   : 0.00682981,
-               'QCDPt3200'   : 0.000165445,
+               'QCDPt80'     : 2735000.,
+               'QCDPt120'    : 467500.,
+               'QCDPt170'    : 117400., 
+               'QCDPt300'    : 7753.,
+               'QCDPt470'    : 642.1,
+               'QCDPt600'    : 185.9,
+               'QCDPt800'    : 32.05,
+               'QCDPt1000'   : 9.365,
+               'QCDPt1400'   : 0.8398,
+               'QCDPt1800'   : 0.1124,
+               'QCDPt2400'   : 0.006752,
+               'QCDPt3200'   : 0.0001626,
                'ST'           : 35.6,
                'ST_t_top'     : 136.02,
                'ST_t_antitop' : 80.95,
                'ZJets'        : 6.97,
                'DYJets'        : 1187, #LO
-               'ttZJets'      : 0.616, #LO
+               'ttZJets'      : 0.6529, #LO
+               'ttHJets'      : 0.295, #LO
                'ttWJets'      : 0.511, #LO
-               'ttHJets'      : 0.5085, #LO
-               'tHQ'          : 0.2608,
-               'WW'           : 28.7,
-               'WZ'           : 22.82,
-               'ZZ'           : 6.842,
+               'tHQ'          : 0.2609,
+               'WW'           : 45.2,
+               'WZ'           : 23.43,
+               'ZZ'           : 6.912,
 
                'TbtH_800_LH'      :1.0,
                'TttH_800_LH'      :1.0,
@@ -799,6 +821,7 @@ sampleXsec1pb = {
                'TttH_1100_RH'     :1.0,
 
                'TbtH_1200_LH'     :1.0,
+               'TbtH_1200_LH_test'     :1.0,
                'TttH_1200_LH'     :1.0,
                'TbtH_1200_RH'     :1.0,
                'TttH_1200_RH'     :1.0,
@@ -829,6 +852,7 @@ sampleXsec1pb = {
                'TttH_1700_RH'     :1.0,
 
                'TbtH_1800_LH'     :1.0,
+               'TbtH_1800_LH_test'     :1.0,
                'TttH_1800_LH'     :1.0,
                'TbtH_1800_RH'     :1.0,
                'TttH_1800_RH'     :1.0,
@@ -1324,22 +1348,22 @@ plotDictBkgr = {
                             'Legend': "t#bar{t}+jets   " ,
                             'Color' : 26,
                           },
-               #'WJets'  : {
-               #             'Legend': "W+jets          ",
-               #             'Color' : 36,
-               #           },
+               'WJets'  : {
+                            'Legend': "W+jets          ",
+                            'Color' : 36,
+                          },
                #'ST'     : {
                #             'Legend':  "Single top: tW  ",
                #             'Color' : 46,
                #           },
                'ST_t'     : {
                             'Legend':  "Single top: t-channel  ",
-                            'Color' : 46,
+                            'Color' : 48,
                           },
-               #'ZJets'  : {
-               #             'Legend': "Z+jets          ",
-               #             'Color' : 12,
-               #           },
+               'ZJets'  : {
+                            'Legend': "Z+jets          ",
+                            'Color' : 12,
+                          },
                'ttZJets': {
                             'Legend': "ttZ+jets        ",
                             'Color' : 31,
@@ -1357,19 +1381,71 @@ plotDictBkgr = {
                #             'Color' : 38,
                #           },
                #'ZZ'     : {
-               #             'Legend': "WZ              ",
-               #             'Color' : 28,
-               #           },
-               #'DYJets' : {
-               #             'Legend': "DY+jets         ",
-               #             'Color' : 28,
+               #             'Legend': "ZZ              ",
+               #             'Color' : 42,
                #           },
                'tHQ'    : {
                             'Legend': "tHQ             ",
                             'Color' : 41,
                           },
+               #'DYJets' : {
+               #             'Legend': "DY+jets         ",
+               #             'Color' : 28,
+               #           },
                }
-plotDictBkgr = {
+plotDictBkgrCompare = {
+
+#  'regionA_QCD' : {
+#    'Legend' : 'Region A',
+#    'Color'  : 1,
+#    'Line'   : 1,
+#    'Fill'   : 0
+#  },
+  'regionB_QCD' : {
+    'Legend' : 'Region B',
+    'Color'  : 2,
+    'Line'   : 1,
+    'Fill'   : 0
+  },
+  'regionC_QCD' : {
+    'Legend' : 'Region C',
+    'Color'  : 3,
+    'Line'   : 1,
+    'Fill'   :0 
+  },
+#  'regionD_MC_QCD' : {
+#    'Legend' : 'Region D',
+#    'Color'  : 4,
+#    'Line'   : 1,
+#    'Fill'   : 0
+#  },
+#  'regionA_QCD' : {
+#    'Legend' : 'Region W',
+#    'Color'  : 1,
+#    'Line'   : 1,
+#    'Fill'   : 0
+#  },
+#  'regionB_QCD' : {
+#    'Legend' : 'Region X',
+#    'Color'  : 2,
+#    'Line'   : 1,
+#    'Fill'   : 0
+#  },
+#  'regionC_QCD' : {
+#    'Legend' : 'Region Y',
+#    'Color'  : 3,
+#    'Line'   : 1,
+#    'Fill'   : 0
+#  },
+#  'regionD_MC_QCD' : {
+#    'Legend' : 'Region Z',
+#    'Color'  : 4,
+#    'Line'   : 1,
+#    'Fill'   : 0
+#  },
+ }
+
+plotDictBkgrTemp = {
                'QCD'    : {
                             'Legend': "Multijets       ",
                             'Color' : 16,
@@ -1378,16 +1454,25 @@ plotDictBkgr = {
                             'Legend': "t#bar{t}+jets   " ,
                             'Color' : 26,
                           },
-#               'Other'  : {
-#                            'Legend': "Other           ",
-#                            'Color' : 36,
-#                          },
+               'Other'  : {
+                            'Legend': "Other           ",
+                            'Color' : 36,
+                          },
 }
 sigScaled = {
+                  'TbtH1200_30p' : {
+                                     'Scale' : '0.142',
+                                   },
                   'TbtH_1200_LH' : {
                                      'Scale' : '10',
                                    },
-                  'TbtH_1200_RH' : {
+                  'TbtH_1000_LH' : {
+                                     'Scale' : '10',
+                                   },
+                  'TbtH_1500_LH' : {
+                                     'Scale' : '10',
+                                   },
+                  'TbtH_1800_00p_LH' : {
                                      'Scale' : '10',
                                    },
                   'TbtH_1800_LH' : {
@@ -1397,8 +1482,11 @@ sigScaled = {
                                      'Scale' : '10',
                                    },
 
-                  'TttH_1200_RH' : {
+                  'TttH_1200_00p_RH' : {
                                      'Scale' : '10',
+                                   },
+                  'TttH1200_30p' : {
+                                     'Scale' : '0.0407',
                                    },
                   'TttH_1800_RH' : {
                                      'Scale' : '10',
@@ -1410,23 +1498,95 @@ sigScaled = {
                   'TbtZ_1200_LH' : { 
                                      'Scale' : '10',
                                    },
+                  'TbtZ_1000_LH' : {
+                                     'Scale' : '10',
+                                   },
+                  'TbtZ_1500_LH' : {
+                                     'Scale' : '10',
+                                   },
                   'TbtZ_1800_LH' : {
+                                     'Scale' : '10',
+                                   },
+                  'TbtZ_1200_30p_LH' : { 
+                                     'Scale' : '0.131',
+                                   },
+                  'TbtZ_1800_00p_LH' : {
+                                     'Scale' : '10',
+                                   },
+                  'TttZ_1200_30p_RH' : { 
+                                     'Scale' : '1',
+                                   },
+                  'TttZ_1800_RH' : {
                                      'Scale' : '10',
                                    },
                  }
 plotDictSignal = {
-                  'TbtH_1200_LH' : {
-                                     'Legend': "#splitline{Tbq, M(T) = 1200 GeV}{"+str(sampleXsec['TbtH_1200_LH'])+" pb xsec.}",
-                                     'LegendScaled': "#splitline{Tbq, M(T) = 1200 GeV}{"+sigScaled['TbtH_1200_LH']['Scale']+'x'+str(sampleXsec['TbtH_1200_LH'])+" pb xsec.}",
+#                  'TbtH1200_30p' : {
+#                                     'Legend': "#splitline{Tbq#rightarrow tH, M(T) = 1200 GeV}{"+str(sampleXsec1pb['TbtH_1200_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq, M(T) = 1200 GeV}{"+sigScaled['TbtH1200_30p']['Scale']+'x'+str(sampleXsec1pb['TbtH_1200_LH'])+" pb xsec.}",
+#                                     'Color' : 4,
+#                                     'Scale' : 0.142,
+#                                   },
+#                  'TbtZ1200_30p' : { 
+#                                     'Legend' : "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+str(sampleXsec1pb['TbtZ_1200_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+sigScaled['TbtZ_1200_30p_LH']['Scale']+'x'+str(sampleXsec1pb['TbtZ_1200_LH'])+" pb xsec.}",
+#                                     'Color' : 2,
+#                                     'Scale' : 0.131,
+#                                   },
+#                  'TbtHtZ1200_00p' : { 
+#                                     'Legend' : "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+str(sampleXsec1pb['TbtZ_1200_LH'])+"*2 pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+sigScaled['TbtZ_1200_00p_LH']['Scale']+'x'+str(sampleXsec1pb['TbtZ_1200_LH'])+" pb xsec.}",
+#                                     'Color' : 2,
+#                                     'Scale' : 10,
+#                                   },
+                  'TttH1200_30p' : {
+                                     'Legend': "#splitline{Ttq#rightarrow tH, M(T) = 1200 GeV}{post fit xsec.}",
+                                     'LegendScaled': "#splitline{Ttq#rightarrow tH, M(T) = 1200 GeV}{post fit xsec.}",
                                      'Color' : 4,
-                                     'Scale' : 10,
+                                     'Scale' : 0.0407,
                                    },
-                  'TbtH_1800_LH' : {
-                                     'Legend': "#splitline{Tbq, M(T) = 1800 GeV}{"+str(sampleXsec['TbtH_1800_LH'])+" pb xsec.}",
-                                     'LegendScaled': "#splitline{Tbq, M(T) = 1800 GeV}{"+sigScaled['TbtH_1800_LH']['Scale']+'x'+str(sampleXsec['TbtH_1800_LH'])+" pb xsec.}",
-                                     'Color' : 3,
-                                     'Scale' : 10,
-                                   },
+#                  'TttZ1200_30p' : { 
+#                                     'Legend' : "#splitline{Ttq#rightarrow tZ, M(T) = 1200 GeV, 30%}{"+str(sampleXsec1pb['TttZ_1200_RH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Ttq#rightarrow tZ, M(T) = 1200 GeV, 30%}{"+sigScaled['TttZ_1200_30p_RH']['Scale']+'x'+str(sampleXsec1pb['TttZ_1200_RH'])+" pb xsec.}",
+#                                     'Color' : 2,
+#                                     'Scale' : 1,
+#                                   },
+#                  'TttHtZ1200_00p' : { 
+#                                     'Legend' : "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+str(sampleXsec1pb['TttZ_1200_RH'])+"*2 pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+sigScaled['TttZ_1200_00p_RH']['Scale']+'x'+str(sampleXsec1pb['TttZ_1200_RH'])+" pb xsec.}",
+#                                     'Color' : 2,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TbtH_1800_00p_LH' : {
+#                                     'Legend': "#splitline{Tbq, M(T) = 1800 GeV}{"+str(sampleXsec1pb['TbtH_1800_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq, M(T) = 1800 GeV}{"+sigScaled['TbtH_1800_00p_LH']['Scale']+'x'+str(sampleXsec1pb['TbtH_1800_LH'])+" pb xsec.}",
+#                                     'Color' : 3,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TbtH_1200_LH' : {
+#                                     'Legend': "#splitline{Tbq, M(T) = 1200 GeV}{"+str(sampleXsec['TbtH_1200_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq, M(T) = 1200 GeV}{"+sigScaled['TbtH_1200_LH']['Scale']+'x'+str(sampleXsec['TbtH_1200_LH'])+" pb xsec.}",
+#                                     'Color' : 4,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TbtH_1500_LH' : {
+#                                     'Legend': "#splitline{Tbq, M(T) = 1500 GeV}{"+str(sampleXsec['TbtH_1500_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq, M(T) = 1500 GeV}{"+sigScaled['TbtH_1500_LH']['Scale']+'x'+str(sampleXsec['TbtH_1500_LH'])+" pb xsec.}",
+#                                     'Color' : 5,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TbtH_1000_LH' : {
+#                                     'Legend': "#splitline{Tbq, M(T) = 1000 GeV}{"+str(sampleXsec['TbtH_1000_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq, M(T) = 1000 GeV}{"+sigScaled['TbtH_1000_LH']['Scale']+'x'+str(sampleXsec['TbtH_1000_LH'])+" pb xsec.}",
+#                                     'Color' : 6,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TbtH_1800_LH' : {
+#                                     'Legend': "#splitline{Tbq, M(T) = 1800 GeV}{"+str(sampleXsec['TbtH_1800_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq, M(T) = 1800 GeV}{"+sigScaled['TbtH_1800_LH']['Scale']+'x'+str(sampleXsec['TbtH_1800_LH'])+" pb xsec.}",
+#                                     'Color' : 3,
+#                                     'Scale' : 10,
+#                                   },
 #                  'TbtH_2600_10p_LH' : { 
 #                                     'Legend' : "#splitline{Tbq, M(T) = 2600 GeV}{"+str(sampleXsec['TbtH_2600_10p_LH'])+" pb xsec.}",
 #                                     'LegendScaled': "#splitline{Tbq, M(T) = 2600 GeV}{"+sigScaled['TbtH_2600_10p_LH']['Scale']+'x'+str(sampleXsec['TbtH_2600_10p_LH'])+" pb xsec.}",
@@ -1453,16 +1613,52 @@ plotDictSignal = {
 #                                     'Scale' : 10,
 #                                   },
 #
+#                  'TbtZ_1200_00p_LH' : { 
+#                                     'Legend' : "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+str(sampleXsec1pb['TbtZ_1200_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+sigScaled['TbtZ_1200_00p_LH']['Scale']+'x'+str(sampleXsec1pb['TbtZ_1200_LH'])+" pb xsec.}",
+#                                     'Color' : 2,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TbtZ_1800_00p_LH' : {
+#                                     'Legend' : "#splitline{Tbq#rightarrow tZ, M(T) = 1800 GeV}{"+str(sampleXsec1pb['TbtZ_1800_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq#rightarrow tZ, M(T) = 1800 GeV}{"+sigScaled['TbtZ_1800_00p_LH']['Scale']+'x'+str(sampleXsec1pb['TbtZ_1800_LH'])+" pb xsec.}",
+#                                     'Color' : 8,
+#                                     'Scale' : 10,
+#                                   },
 #                  'TbtZ_1200_LH' : { 
 #                                     'Legend' : "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+str(sampleXsec['TbtZ_1200_LH'])+" pb xsec.}",
 #                                     'LegendScaled': "#splitline{Tbq#rightarrow tZ, M(T) = 1200 GeV}{"+sigScaled['TbtZ_1200_LH']['Scale']+'x'+str(sampleXsec['TbtZ_1200_LH'])+" pb xsec.}",
 #                                     'Color' : 2,
 #                                     'Scale' : 10,
 #                                   },
+#                  'TbtZ_1500_LH' : {
+#                                     'Legend': "#splitline{Tbq, M(T) = 1500 GeV}{"+str(sampleXsec['TbtZ_1500_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq, M(T) = 1500 GeV}{"+sigScaled['TbtZ_1500_LH']['Scale']+'x'+str(sampleXsec['TbtZ_1500_LH'])+" pb xsec.}",
+#                                     'Color' : 7,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TbtZ_1000_LH' : {
+#                                     'Legend': "#splitline{Tbq, M(T) = 1000 GeV}{"+str(sampleXsec['TbtZ_1000_LH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Tbq, M(T) = 1000 GeV}{"+sigScaled['TbtZ_1000_LH']['Scale']+'x'+str(sampleXsec['TbtZ_1000_LH'])+" pb xsec.}",
+#                                     'Color' : 8,
+#                                     'Scale' : 10,
+#                                   },
 #                  'TbtZ_1800_LH' : {
 #                                     'Legend' : "#splitline{Tbq#rightarrow tZ, M(T) = 1800 GeV}{"+str(sampleXsec['TbtZ_1800_LH'])+" pb xsec.}",
 #                                     'LegendScaled': "#splitline{Tbq#rightarrow tZ, M(T) = 1800 GeV}{"+sigScaled['TbtZ_1800_LH']['Scale']+'x'+str(sampleXsec['TbtZ_1800_LH'])+" pb xsec.}",
 #                                     'Color' : 8,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TttZ_1200_RH' : {
+#                                     'Legend' : "#splitline{Ttq#rightarrow tZ, M(T) = 1200 GeV}{"+str(sampleXsec['TttZ_1800_RH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Ttq#rightarrow tZ, M(T) = 1200 GeV}{"+sigScaled['TttZ_1200_RH']['Scale']+'x'+str(sampleXsec['TttZ_1200_RH'])+" pb xsec.}",
+#                                     'Color' : 7,
+#                                     'Scale' : 10,
+#                                   },
+#                  'TttZ_1800_RH' : {
+#                                     'Legend' : "#splitline{Ttq#rightarrow tZ, M(T) = 1800 GeV}{"+str(sampleXsec['TttZ_1800_RH'])+" pb xsec.}",
+#                                     'LegendScaled': "#splitline{Ttq#rightarrow tZ, M(T) = 1800 GeV}{"+sigScaled['TttZ_1800_RH']['Scale']+'x'+str(sampleXsec['TttZ_1800_RH'])+" pb xsec.}",
+#                                     'Color' : 6,
 #                                     'Scale' : 10,
 #                                   },
                  }
